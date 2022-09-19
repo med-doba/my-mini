@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/16 11:12:30 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:23:35 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,9 @@ void	ft_export(t_lexer *lexer, t_env **env);
 void	ft_inject_var(char *name, char *value, t_env **env);
 char	**ft_split_export(char *str);
 void	ft_sort_env(t_env **env);
+void	ft_unset(t_lexer *lexer, t_env **env);
 //execution
-void	ft_collect_cmd(t_lexer **lexer);
+void	ft_collect_cmd(t_lexer **lexer, t_env **env);
+int		ft_built_in_uppercase(t_lexer *lexer, t_env *env);
+int		ft_built_in_lowercase(t_lexer *lexer, t_env *env);
 #endif

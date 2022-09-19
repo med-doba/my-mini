@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:34:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/15 23:50:31 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:48:47 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_handle(t_env *env)
 		lexer = NULL;
 		var.id = 0;
 		rtn = readline("MiniShell>$");
+		rtn = ft_strtrim(rtn, " ");
+		rtn = ft_strtrim(rtn, "	");
 		var.usr = rtn;
 		if (rtn == NULL)
 			return (free(rtn), ft_control_d());
@@ -66,26 +68,15 @@ void	ft_handle(t_env *env)
 		top = lexer;
 		ft_expand(&lexer, env);
 		ft_parser(&lexer);
-		ft_collect_cmd(&lexer);
-		while(lexer)
-		{
-			if (ft_strcmp(lexer->content, "env") == 0)
-				ft_env(env);
-			if (ft_strcmp(lexer->content, "pwd") == 0)
-				ft_pwd(env);
-			if (ft_strcmp(lexer->content, "cd") == 0)
-				ft_cd(lexer, &env);
-			if (ft_strcmp(lexer->content, "export") == 0)
-				ft_export(lexer, &env);
-			if (ft_strcmp(lexer->content, "exit") == 0)
-				ft_exit(lexer);
-			if (ft_strcmp(lexer->content, "echo") == 0)
-				ft_echo(lexer);
-			// printf("cmd=%s$\n", lexer->content);
-			// printf("ch=%c$\n", lexer->ch);
-			// printf("------------------------------\n");
-			lexer = lexer->next;
-		}
+		if (rtn[0] != '\0')
+			ft_collect_cmd(&lexer, &env);
+		// while(lexer)
+		// {
+		// 	printf("cmd=$%s$\n", lexer->content);
+		// 	printf("ch=$%c$\n", lexer->ch);
+		// 	printf("------------------------------\n");
+		// 	lexer = lexer->next;
+		// }
 		if (lexer != NULL)
 			ft_free_lst(&lexer);
 		free(rtn);

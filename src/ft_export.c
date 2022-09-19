@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:26:24 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/16 13:44:14 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/17 11:24:40 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_export(t_lexer *lexer, t_env **env)
 			index++;
 		}
 	}
-	else if (lexer->next)
+	while (lexer->next && lexer->next->ch != '|' && lexer->next->ch != 'R')
 	{
 		ptr = ft_split_export(lexer->next->content);
 		if (ptr == NULL)
@@ -48,6 +48,7 @@ void	ft_export(t_lexer *lexer, t_env **env)
 		free(ptr);
 		// free(ptr[0]);
 		// free(ptr[1]);
+		lexer->next = lexer->next->next;
 	}
 }
 
@@ -100,10 +101,7 @@ char	**ft_split_export(char *str)
 		ptr[1] = ft_strdup("");
 	}
 	while (str[i])
-	{
-		printf("bb\n");
 		ptr[1] = ft_join(ptr[1], str[i++]);
-	}
 	return (ptr);
 }
 

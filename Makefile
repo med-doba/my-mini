@@ -6,8 +6,8 @@ CFLAGS= -Wall -Wextra -Werror
 
 CFILES = mini.c ft_header.c ft_lexer.c ft_lst_lexer.c ft_lst_env.c ft_parser.c \
 		ft_environment.c ft_expand.c ft_expand_utils0.c ft_expand_utils1.c ft_lexer_scan.c \
-		ft_lexer_utils1.c ft_lexer_utils0.c ft_scan_utils.c ft_execution.c ft_env.c ft_pwd.c ft_cd.c ft_echo.c ft_exit.c \
-		ft_export.c \
+		ft_lexer_utils1.c ft_lexer_utils0.c ft_scan_utils.c ft_execution.c ft_env.c ft_pwd.c \
+		ft_export.c ft_echo.c ft_exit.c ft_unset.c ft_cd.c ft_built_in.c\
 
 OFILES = $(addprefix $(OBJ_DIR)/,$(CFILES:.c=.o))
 

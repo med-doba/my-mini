@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 23:02:10 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/14 12:58:38 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:47:02 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@ void	ft_exit(t_lexer *lexer)
 {
 	if (!lexer->next)
 		exit(0);//khasha tkon b akhir exit status
-	else if (lexer->next)
+	lexer = lexer->next;
+	if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 	{
-		if(ft_test_arg_exit(lexer->next->content, lexer->next->ch) == 0)
-			exit(ft_atoi(lexer->next->content));
+		if(ft_test_arg_exit(lexer->content, lexer->ch) == 0)
+		{
+			if (lexer->next)
+			{
+				if(ft_test_arg_exit(lexer->next->content, lexer->next->ch) != 2)
+					return (ft_putendl_fd("exit\nError: too many arguments", 2));
+			}
+			exit(ft_atoi(lexer->content));
+		}
 		else
-			ft_putendl_fd("Error: numeric argument required" ,2);
-	}
-	else if (lexer->next->next)
-	{
-		if(ft_test_arg_exit(lexer->next->next->content, lexer->next->next->ch) != 2)
-			ft_putendl_fd("Error: exit too many arguments", 2);
+		{
+			ft_putendl_fd("exit\nError: numeric argument required" ,2);
+			exit(255);
+		}
 	}
 }
 

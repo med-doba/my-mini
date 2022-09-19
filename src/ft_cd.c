@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:20:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/14 19:07:19 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:55:04 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_cd(t_lexer *lexer, t_env **env)
 	if (lexer->next)
 	{
 		if (chdir(lexer->next->content) == -1)
-			return (perror("chdir"), exit(1));
+			return (perror("chdir"));
 		ft_change_pwd_oldpwd(env, oldcwd);
 	}
 	else if (!lexer->next)
@@ -43,7 +43,7 @@ void	ft_cd_to_home(t_env **env, char *oldcwd)
 		if (ft_strcmp(top->key, "HOME") == 0)
 		{
 			if (chdir(top->value) == -1)
-				return (perror("chdir"), exit(1));
+				return (perror("chdir"));
 			ft_change_pwd_oldpwd(env, oldcwd);
 			i++;
 		}
