@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:34:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/19 16:48:47 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:39:43 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	ft_handle(t_env *env)
 		ft_expand(&lexer, env);
 		ft_parser(&lexer);
 		if (rtn[0] != '\0')
-			ft_collect_cmd(&lexer, &env);
+			ft_execution(&lexer, &env);
+		// 	ft_collect_cmd(&lexer, &env);
 		// while(lexer)
 		// {
 		// 	printf("cmd=$%s$\n", lexer->content);
@@ -77,8 +78,12 @@ void	ft_handle(t_env *env)
 		// 	printf("------------------------------\n");
 		// 	lexer = lexer->next;
 		// }
+		// printf("str = %s\n", lexer->content);
 		if (lexer != NULL)
+		{
+			puts("cv");
 			ft_free_lst(&lexer);
+		}
 		free(rtn);
 	}
 }
@@ -103,6 +108,7 @@ int	main(int ac, char **av, char **envp)
 	signal(2, ft_sighandler);
 	signal(3, SIG_IGN);
 	signal(3, ft_sighandler);
+	var.arg_env = envp;
 	env = ft_environment(envp, env);
 	ft_handle(env);
 	ft_free_lst_env(&env);

@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:50:36 by med-doba          #+#    #+#             */
-/*   Updated: 2022/08/20 16:06:57 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:12:24 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_header(void)
 {
 	printf("*******************************************\n");
 	printf("*  <<MED-DOBA>>     WELCOME TO MINISHELL  *\n");
-	printf("*   <<ADAIFI>>      WELCOME TO MINISHELL  *\n");
+	printf("*  <<AMASNAUI>>     WELCOME TO MINISHELL  *\n");
 	printf("*******************************************\n");
 }

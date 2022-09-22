@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/19 15:23:35 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:03:16 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ struct s_global
 	pid_t	cpid;
 	int		st;
 	char	*usr;
+	char	**arg_env;
 } var;
 
 typedef struct fds
@@ -129,6 +130,13 @@ void	ft_sort_env(t_env **env);
 void	ft_unset(t_lexer *lexer, t_env **env);
 //execution
 void	ft_collect_cmd(t_lexer **lexer, t_env **env);
+int		ft_built_in(t_lexer *lexer, t_env *env);
+void	ft_execve(t_lexer *lexer, t_env *env);
+int		ft_execution_up(t_lexer **lexer, t_env **env);
+int		ft_run_redirection(t_lexer *lexer);
+void	ft_execution(t_lexer **lexer, t_env **env);
 int		ft_built_in_uppercase(t_lexer *lexer, t_env *env);
 int		ft_built_in_lowercase(t_lexer *lexer, t_env *env);
+char	*ft_find_path(char *cmd, t_env *env);
+char	**ft_get_full_cmd(t_lexer *lexer);
 #endif

@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:44:41 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/19 16:45:26 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:10:08 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	hub = malloc(sizeof(char) * (j - i + 1));
 	if (hub == NULL)
 		return (NULL);
-	ft_memcpy (hub, s1 + i, j);
+	ft_memcpy (hub, s1 + i, (j - i));
 	hub[j] = '\0';
 	free((void *)s1);
 	return (hub);
