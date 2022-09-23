@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/22 23:14:33 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:18:16 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,19 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	char	**arg_cmd;
 	char	*path;
 
+	arg_cmd = NULL;
 	if ((path  = ft_find_path(lexer->content, env)) == NULL)
 		return (ft_putendl_fd("Error: command not found", 2));
-	printf("the path = <%s>\n", path);
 	if ((pid = fork()) == -1)
 		return (perror("fork"));
 	if (pid == 0)
 	{
-		if (lexer->next && lexer->next->ch != '|' && lexer->next->ch != 'R')
-			arg_cmd = ft_get_full_cmd(lexer->next);
-		else
-			arg_cmd = NULL;
+		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
+			arg_cmd = ft_get_full_cmd(lexer);
 		if (execve(path, arg_cmd, var.arg_env) == -1)
+		{
 			return (ft_free_2d(arg_cmd), perror("execve"), exit(127));
+		}
 	}
 	wait(NULL);
 }
@@ -87,16 +87,20 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 char	**ft_get_full_cmd(t_lexer *lexer)
 {
 	char	*ptr;
+	char	*tmp;
 	char	**two;
 
-	ptr = NULL;
+	tmp = ft_strdup("");
+	ptr = ft_strdup("");
 	while (lexer && lexer->ch != '|' && lexer->ch != 'R')
 	{
-		ptr = ft_strjoin(lexer->content, ";");
+		tmp = ft_strjoin(lexer->content, ";");
+		ptr = ft_strjoin(ptr, tmp);
+		free(tmp);
 		lexer = lexer->next;
 	}
 	two = ft_split(ptr, ';');
-	return (two);
+	return (free(ptr), free(tmp), two);
 }
 
 char	*ft_find_path(char *cmd, t_env *env)

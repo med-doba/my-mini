@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:50:00 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/22 13:06:00 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/23 09:18:34 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_built_in(t_lexer *lexer, t_env *env)
 {
 	if (ft_built_in_uppercase(lexer, env) == -1)
 		if (ft_built_in_lowercase(lexer, env) == -1)
-			return (ft_putendl_fd("Error built in", 2), -1);
+			return (-1);
 	return (0);
 }
 
