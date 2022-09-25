@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 12:36:33 by med-doba          #+#    #+#             */
-/*   Updated: 2022/08/29 19:22:41 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:15:37 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_expand_status(char *str)
 	int		i;
 
 	i = 0;
-	status = ft_itoa(var.st);
+	status = ft_itoa(gl.st);
 	rtn = ft_strdup("");
 	while (str[i])
 	{

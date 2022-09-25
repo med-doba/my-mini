@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:27:29 by med-doba          #+#    #+#             */
-/*   Updated: 2022/08/30 01:28:31 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:15:37 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_utils_pipe(char *str)
 	i = ft_skip_withespace(str, i);
 	if (str[i] == '|')
 	{
-		var.st = 258;
+		gl.st = 258;
 		ft_putendl_fd("Error: syntax `|'", 2);
 		return (1);
 	}
@@ -30,7 +30,7 @@ int	ft_utils_pipe(char *str)
 		i--;
 	if (str[i] == '|')
 	{
-		var.st = 258;
+		gl.st = 258;
 		ft_putendl_fd("Error: > ...", 2);
 		return (1);
 	}

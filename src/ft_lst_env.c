@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:54:37 by med-doba          #+#    #+#             */
-/*   Updated: 2022/08/20 16:26:15 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 07:24:47 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_env	*ft_lstnew_env(char *name, char *value)
 	node = (t_env *)malloc(sizeof(t_env));
 	if (node == NULL)
 		return (NULL);
-	node->key = ft_strdup(name);
+	node->name = ft_strdup(name);
 	if (value)
 		node->value = ft_strdup(value);
 	node->next = NULL;
@@ -51,7 +51,7 @@ void	ft_free_lst_env(t_env **head)
 	while ((*head))
 	{
 		free((*head)->value);
-		free((*head)->key);
+		free((*head)->name);
 		tmp = (*head)->next;
 		free((*head));
 		(*head) = tmp;

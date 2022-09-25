@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:26:24 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/17 11:24:40 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 07:27:14 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ft_export(t_lexer *lexer, t_env **env)
 			while (head0->index != index)
 				head0 = head0->next;
 			if (head0->value)
-				printf("declare -x %s=\"%s\"\n", head0->key, head0->value);
+				printf("declare -x %s=\"%s\"\n", head0->name, head0->value);
 			else
-				printf("declare -x %s\n", head0->key);
+				printf("declare -x %s\n", head0->name);
 			head1 = head1->next;
 			head0 = *env;
 			index++;
@@ -61,7 +61,7 @@ void	ft_inject_var(char *name, char *value, t_env **env)
 	already_exists = 0;
 	while (*env)
 	{
-		if (ft_strcmp((*env)->key, name) == 0)
+		if (ft_strcmp((*env)->name, name) == 0)
 		{
 			free((*env)->value);
 			(*env)->value = ft_strdup(value);
@@ -119,7 +119,7 @@ void	ft_sort_env(t_env **env)
 		*env = tmp;
 		while (*env)
 		{
-			if (ft_strcmp(top->key, (*env)->key) > 0)
+			if (ft_strcmp(top->name, (*env)->name) > 0)
 				i++;
 			*env = (*env)->next;
 		}

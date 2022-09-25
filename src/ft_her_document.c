@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_header.c                                        :+:      :+:    :+:   */
+/*   ft_her_document.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 18:50:36 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 15:50:55 by med-doba         ###   ########.fr       */
+/*   Created: 2022/09/25 18:16:53 by med-doba          #+#    #+#             */
+/*   Updated: 2022/09/25 18:17:23 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
-void	ft_header(void)
+int	ft_expand_herdoc(t_lexer **lexer)
 {
-	printf("********************************************\n");
-	printf("****** <<MED-DOBA>>  &&  <<AMASNAUI>> ******\n");
-	printf("*********** WELCOME TO MINISHELL ***********\n");
-	printf("********************************************\n");
+	if ((*lexer) && !ft_strcmp((*lexer)->content, "<<") && (*lexer)->next)
+	{
+		(*lexer) = (*lexer)->next;
+		if ((*lexer)->next)
+			(*lexer) = (*lexer)->next;
+		else if (!(*lexer)->next)
+			return (1);
+	}
+	return (0);
 }

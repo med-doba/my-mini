@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_expand_utils.c                                  :+:      :+:    :+:   */
+/*   ft_expand_utils0.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 09:17:21 by med-doba          #+#    #+#             */
-/*   Updated: 2022/08/20 16:53:32 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 07:25:17 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_util_tilde(t_env **env, t_env **head, char *str, int *i)
 	*head = *env;
 	while (*env)
 	{
-		if (ft_strcmp((*env)->key, "HOME") == 0)
+		if (ft_strcmp((*env)->name, "HOME") == 0)
 		{
 			rtn = ft_strjoin(rtn, (*env)->value);
 			break ;

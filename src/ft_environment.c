@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_environment.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adaifi <adaifi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 10:57:18 by med-doba          #+#    #+#             */
-/*   Updated: 2022/08/24 18:33:42 by adaifi           ###   ########.fr       */
+/*   Updated: 2022/09/24 19:31:24 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	ft_free_2d(char **ptr)
 
 	i = 0;
 	while (ptr[i])
-		free(ptr[i++]);
+	{
+		free(ptr[i]);
+		i++;
+	}
 	free(ptr);
 }
 

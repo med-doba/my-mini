@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:32:13 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/16 17:04:02 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:10:14 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	ft_unset(t_lexer *lexer, t_env **env)
 {
-	t_env *head;
-	t_env *tmp;
+	t_env	*head;
+	t_env	*tmp;
 
 	head = *env;
-	while(lexer->next)
+	while (lexer->next)
 	{
 		while (*env)
 		{
-			if (ft_strcmp(lexer->next->content, (*env)->key) == 0)
+			if (ft_strcmp(lexer->next->content, (*env)->name) == 0)
 			{
-				free((*env)->key);
+				free((*env)->name);
 				free((*env)->value);
 				tmp->next = (*env)->next;
 				free(*env);

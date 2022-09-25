@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:50:00 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/23 09:18:34 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:57:35 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	ft_built_in_uppercase(t_lexer *lexer, t_env *env)
 	else if (ft_strcmp(lexer->content, "CD") == 0)
 		return (0);
 	else if (ft_strcmp(lexer->content, "EXPORT") == 0
-			|| ft_strcmp(lexer->content, "UNSET") == 0
-			|| ft_strcmp(lexer->content, "EXIT") == 0)
+		|| ft_strcmp(lexer->content, "UNSET") == 0
+		|| ft_strcmp(lexer->content, "EXIT") == 0)
 		return (ft_putendl_fd("Error: command not found", 2), 1);
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:20:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/19 15:55:04 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:05:31 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	ft_cd_to_home(t_env **env, char *oldcwd)
 
 	top = *env;
 	i = 0;
-	while(top)
+	while (top)
 	{
-		if (ft_strcmp(top->key, "HOME") == 0)
+		if (ft_strcmp(top->name, "HOME") == 0)
 		{
 			if (chdir(top->value) == -1)
 				return (perror("chdir"));
@@ -60,14 +60,14 @@ void	ft_change_pwd_oldpwd(t_env **env, char *oldcwd)
 
 	getcwd(cwd, 1024);
 	top = *env;
-	while(*env)
+	while (*env)
 	{
-		if (ft_strcmp((*env)->key, "PWD") == 0)
+		if (ft_strcmp((*env)->name, "PWD") == 0)
 		{
 			free((*env)->value);
 			(*env)->value = ft_strdup(cwd);
 		}
-		else if (ft_strcmp((*env)->key, "OLDPWD") == 0)
+		else if (ft_strcmp((*env)->name, "OLDPWD") == 0)
 		{
 			free((*env)->value);
 			(*env)->value = ft_strdup(oldcwd);

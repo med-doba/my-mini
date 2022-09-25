@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 09:31:15 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/11 16:49:34 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:17:16 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_join_value(t_env *env, char **stock, char *rtn)
 {
 	while (env)
 	{
-		if (ft_strcmp((env)->key, *stock) == 0)
+		if (ft_strcmp((env)->name, *stock) == 0)
 		{
 			free(*stock);
 			*stock = ft_strdup((env)->value);
@@ -114,15 +114,3 @@ char	*ft_tilde(char *str, t_env *env)
 	return (rtn);
 }
 
-int	ft_expand_herdoc(t_lexer **lexer)
-{
-	if ((*lexer) && !ft_strcmp((*lexer)->content, "<<") && (*lexer)->next)
-	{
-		(*lexer) = (*lexer)->next;
-		if ((*lexer)->next)
-			(*lexer) = (*lexer)->next;
-		else if (!(*lexer)->next)
-			return (1);
-	}
-	return (0);
-}
