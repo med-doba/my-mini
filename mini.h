@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 16:17:29 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:46:01 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@
 
 struct s_global
 {
+	int		fd_file;
 	int		sig;
 	int		her_doc;
 	int		st;
 	char	*rl_r;
 	char	**arg_env;
+	int		in;
+	int		out;
 } gl;
 
 typedef struct fds
@@ -138,9 +141,10 @@ int		ft_built_in_uppercase(t_lexer *lexer, t_env *env);
 int		ft_built_in_lowercase(t_lexer *lexer, t_env *env);
 char	*ft_find_path(char *cmd, t_env *env);
 char	**ft_get_full_cmd(t_lexer *lexer);
-int		ft_her_duc(void);
+int		ft_her_duc(char	*delimiter);
 int		ft_append(char *file);
 int		ft_r_output(char *file);
 int		ft_r_input(char *file);
 char	*ft_collect_path(char	*cmd, char **ptr);
+int		ft_nbr_of_pipes(t_lexer *lexer);
 #endif

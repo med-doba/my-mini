@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:00:22 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 16:04:34 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/05 23:06:42 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,22 @@ char	**ft_get_full_cmd(t_lexer *lexer)
 {
 	char	*ptr;
 	char	**two;
+	t_lexer *tmp;
 
+	tmp = lexer;
 	ptr = ft_strdup("");
-	while (lexer && lexer->ch != '|' && lexer->ch != 'R')
+	while (tmp && tmp->ch != '|' && tmp->ch != 'R')
 	{
-		ptr = ft_strjoin(ptr, ft_strjoin(lexer->content, ";"));
-		lexer = lexer->next;
+		ptr = ft_strjoin(ptr, ft_strjoin(tmp->content, ";"));
+		tmp = tmp->next;
+		if (tmp != NULL)
+		{
+			if (tmp && ft_strcmp(tmp->content, "<<") == 0)
+			{
+				ptr = ft_strjoin(ptr, ".her_doc");
+				tmp = tmp->next->next;
+			}
+		}
 	}
 	two = ft_split(ptr, ';');
 	return (free(ptr), two);

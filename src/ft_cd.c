@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:20:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 16:05:31 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:57:32 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_cd(t_lexer *lexer, t_env **env)
 {
-	t_env	*top;
+	// t_env	*top;
 	char	oldcwd[1024];
 
-	top = *env;
+	// top = *env;
 	getcwd(oldcwd, 1024);
 	if (lexer->next)
 	{

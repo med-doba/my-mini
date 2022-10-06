@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 16:15:37 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/05 23:10:52 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 				return (-1);
 		top = top->next;
 	}
-	if (ft_built_in(*lexer, *env) == -1)
+	if ((*lexer)->ch != 'R' && ft_built_in(*lexer, *env) == -1)
 		ft_execve(*lexer, *env);
+	if (gl.her_doc == 1)
+		unlink(".her_doc");
 	dup2(out, STDOUT_FILENO);
 	dup2(in, STDIN_FILENO);
 	close(out);
@@ -55,7 +57,9 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	pid_t	pid;
 	char	**arg_cmd;
 	char	*path;
+	int		i;
 
+	i = 0;
 	arg_cmd = NULL;
 	if ((path = ft_find_path(lexer->content, env)) == NULL)
 		return (ft_putendl_fd("Error: command not found", 2));
@@ -66,6 +70,8 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	{
 		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 			arg_cmd = ft_get_full_cmd(lexer);
+		while (arg_cmd[i])
+			printf("cmd = %s\n", arg_cmd[i++]);
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
 			return (perror("execve"), ft_free_2d(arg_cmd), exit(127));
 	}
@@ -81,7 +87,7 @@ int	ft_nbr_of_pipes(t_lexer *lexer)
 	top = lexer;
 	while (top)
 	{
-		if (top->ch != '|')
+		if (top->ch == '|')
 			pipe++;
 		top = top->next;
 	}
