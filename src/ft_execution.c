@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/05 23:10:52 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:41:37 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 void	ft_execution(t_lexer **lexer, t_env **env)
 {
-	int n;
+	int pipe;
 
-	n = ft_nbr_of_pipes(*lexer);
-	if (n == 0)
+	pipe = ft_nbr_of_pipes(*lexer);
+	if (pipe == 0)
 	{
-		while (*lexer)
+		// while (*lexer)
+		if (*lexer)
 		{
 			if (ft_execution_one_commande(lexer, env) == -1)
 				return ;
-			while (*lexer && (*lexer)->ch != '|')
-				*lexer = (*lexer)->next;
-			if (*lexer)
-				*lexer = (*lexer)->next;
+			// while (*lexer && (*lexer)->ch != '|')
+			// 	*lexer = (*lexer)->next;
+			// if (*lexer)
+			// 	*lexer = (*lexer)->next;
 		}
 	}
 	else
-	{
-		ft_execute_pipe(lexer, env, n);
-	}
+		ft_execute_pipe(lexer, env, pipe);
 }
 
 int	ft_execution_one_commande(t_lexer **lexer, t_env **env)
@@ -120,7 +119,7 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	arg_cmd = NULL;
 	if ((path = ft_find_path(lexer->content, env)) == NULL)
 		return (ft_putendl_fd("Error: command not found", 2));
-	gl.sig = 1;
+	// gl.sig = 1;
 	// if ((pid = fork()) == -1)
 	// 	return (perror("fork"));
 	// if (pid == 0)
@@ -128,7 +127,7 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 			arg_cmd = ft_get_full_cmd(lexer);
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
-			return (perror("execve"), ft_free_2d(arg_cmd), exit(127));
+			return (perror("execve"), ft_free_2d(arg_cmd)/*, exit(127)*/);
 	// }
 	// wait(NULL);
 }

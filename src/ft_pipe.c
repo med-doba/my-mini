@@ -51,7 +51,10 @@ void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n)
 	in = dup(STDIN_FILENO);
     while(*lexer)
     {
+        gl.sig = 1;
         pid = fork();
+        if (pid == -1)
+            return (perror("fork pipe"));
         if (pid == 0)
         {
             if (i < n)
@@ -60,7 +63,8 @@ void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n)
                 dup2(fd[i-1][0], 0);
             close_pipe(fd, n);
             if (ft_execution_up(lexer, env) == -1)
-                return;
+                return (exit(1));
+            exit(0);
         }
         while (*lexer && (*lexer)->ch != '|')
             *lexer = (*lexer)->next;
@@ -73,5 +77,5 @@ void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n)
 	dup2(in, STDIN_FILENO);
 	close(out);
 	close(in);
-    wait_childs(n+1);
+    wait_childs((n + 1));
 }
