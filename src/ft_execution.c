@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/06 14:41:37 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:54:13 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
 			return (perror("execve"), ft_free_2d(arg_cmd), exit(127));
 	}
+	free(path);
 	wait(NULL);
 }
 
@@ -119,7 +120,6 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	arg_cmd = NULL;
 	if ((path = ft_find_path(lexer->content, env)) == NULL)
 		return (ft_putendl_fd("Error: command not found", 2));
-	// gl.sig = 1;
 	// if ((pid = fork()) == -1)
 	// 	return (perror("fork"));
 	// if (pid == 0)
@@ -127,7 +127,8 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 			arg_cmd = ft_get_full_cmd(lexer);
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
-			return (perror("execve"), ft_free_2d(arg_cmd)/*, exit(127)*/);
+			return (perror("execve"), free(path), ft_free_2d(arg_cmd));
+		free(path);
 	// }
 	// wait(NULL);
 }
