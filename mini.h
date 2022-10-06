@@ -147,4 +147,9 @@ int		ft_r_output(char *file);
 int		ft_r_input(char *file);
 char	*ft_collect_path(char	*cmd, char **ptr);
 int		ft_nbr_of_pipes(t_lexer *lexer);
+void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n);
+void 	close_pipe(int fd[][2], int n);
+int		ft_execution_one_commande(t_lexer **lexer, t_env **env);
+void	ft_execve_one_commande(t_lexer *lexer, t_env *env);
+void	open_pipes(int fd[][2], int n);
 #endif
