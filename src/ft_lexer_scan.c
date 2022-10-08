@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:19:15 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 16:15:37 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:18:30 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_scan_redirection(char *str, int *i, char c)
 		rtn = ft_strjoin(rtn, tmp);
 		free(tmp);
 		(*i)++;
-		if (str[*i] == ' ' || str[*i] == '\t')
+		if (str[*i] == ' ' || str[*i] == '\t' || str[*i] == '|')
 		{
 			(*i) = ft_skip_withespace(str, *i);
 			if (str[*i] == '<' || str[*i] == '>'
