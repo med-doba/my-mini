@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:00:22 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/06 16:50:46 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:18:18 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,14 @@ char	**ft_get_full_cmd(t_lexer *lexer)
 	ptr = ft_strdup("");
 	while (tmp && tmp->ch != '|' /*&& tmp->ch != 'R'*/)
 	{
-		// printf("dkhsl hna\n");
-		ft_putendl_fd("popo", 2);
 		if (tmp != NULL && tmp->ch == 'R')
 		{
-			printf("hna dd\n");
 			tmp = tmp->next->next;
 		}
 		if (tmp != NULL && tmp->ch != 'R')
 		{
 			ptr = ft_strjoin(ptr, ft_strjoin(tmp->content, ";"));
-			printf("cmd %s\n", tmp->content);
+			// printf("cmd %s\n", tmp->content);
 			tmp = tmp->next;
 		}
 		if (tmp != NULL)
