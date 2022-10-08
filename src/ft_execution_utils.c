@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:00:22 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/06 16:50:46 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:18:18 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ char	**ft_get_full_cmd(t_lexer *lexer)
 	while (tmp && tmp->ch != '|' /*&& tmp->ch != 'R'*/)
 	{
 		if (tmp != NULL && tmp->ch == 'R')
+<<<<<<< HEAD
+=======
+		{
+>>>>>>> f8cb679ae136ddaa325e7c73d17d5be5a06531a2
 			tmp = tmp->next->next;
 		if (tmp != NULL && tmp->ch != 'R')
 		{
 			ptr = ft_strjoin(ptr, ft_strjoin(tmp->content, ";"));
+<<<<<<< HEAD
+=======
+			// printf("cmd %s\n", tmp->content);
+>>>>>>> f8cb679ae136ddaa325e7c73d17d5be5a06531a2
 			tmp = tmp->next;
 		}
 		if (tmp != NULL)

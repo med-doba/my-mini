@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:27:32 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 16:06:02 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/08 13:30:22 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,26 @@ void	ft_echo(t_lexer *lexer)
 	newline = 0;
 	if (!lexer->next)
 		printf("\n");
-	while (lexer->next && lexer->next->ch != 'R' && lexer->next->ch != '|')
+	lexer = lexer->next;
+
+	while (lexer && lexer->ch != '|')
 	{
+		while(lexer && lexer->ch != '|' && lexer->ch == 'R')
+			lexer = lexer->next->next;
+		if (!lexer || lexer->ch == '|')
+		{
+			printf("\n");
+			break ;
+		}
 		if (firstone == 0)
-			while (lexer->next && ft_check_option_echo(lexer->next->content, &newline) == 2)
-				lexer->next = lexer->next->next;
+			while (lexer && ft_check_option_echo(lexer->content, &newline) == 2)
+				lexer = lexer->next;
 		firstone = 1;
 		if (space == 1)
 			printf(" ");
-		printf ("%s", lexer->next->content);
+		printf ("%s", lexer->content);
 		space = 1;
-		lexer->next = lexer->next->next;
+		lexer = lexer->next;
 	}
 	if (space == 1 && newline == 0)
 		printf("\n");
