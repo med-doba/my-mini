@@ -22,17 +22,11 @@ char	**ft_get_full_cmd(t_lexer *lexer)
 	ptr = ft_strdup("");
 	while (tmp && tmp->ch != '|' /*&& tmp->ch != 'R'*/)
 	{
-		// printf("dkhsl hna\n");
-		ft_putendl_fd("popo", 2);
 		if (tmp != NULL && tmp->ch == 'R')
-		{
-			printf("hna dd\n");
 			tmp = tmp->next->next;
-		}
 		if (tmp != NULL && tmp->ch != 'R')
 		{
 			ptr = ft_strjoin(ptr, ft_strjoin(tmp->content, ";"));
-			printf("cmd %s\n", tmp->content);
 			tmp = tmp->next;
 		}
 		if (tmp != NULL)

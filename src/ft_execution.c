@@ -63,7 +63,8 @@ int	ft_execution_one_commande(t_lexer **lexer, t_env **env)
 
 void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 {
-	pid_t	pid;
+	// pid_t	pid;
+	int		pid;
 	char	**arg_cmd;
 	char	*path;
 
@@ -71,7 +72,7 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 	while (lexer && lexer->ch == 'R' && lexer->ch != '|')
 		lexer = lexer->next->next;
 	if ((path = ft_find_path(lexer->content, env)) == NULL)
-		return (ft_putendl_fd("Error: command not found", 2));
+		return (gl.st = 127, ft_putendl_fd("Error: command not found", 2));
 	gl.sig = 1;
 	if ((pid = fork()) == -1)
 		return (perror("fork"));
@@ -83,7 +84,8 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 			return (perror("execve"), ft_free_2d(arg_cmd), exit(127));
 	}
 	free(path);
-	wait(NULL);
+	wait(&pid);
+	gl.st = WEXITSTATUS(pid);
 }
 
 int	ft_execution_up(t_lexer **lexer, t_env **env)
@@ -121,7 +123,7 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 
 	arg_cmd = NULL;
 	if ((path = ft_find_path(lexer->content, env)) == NULL)
-		return (ft_putendl_fd("Error: command not found", 2));
+		return (gl.st = 127, ft_putendl_fd("Error: command not found", 2));
 	// if ((pid = fork()) == -1)
 	// 	return (perror("fork"));
 	// if (pid == 0)

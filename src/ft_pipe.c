@@ -13,7 +13,7 @@ void close_pipe(int fd[][2], int n)
     }
 }
 
-void	wait_childs(int len)
+void	wait_childs(int len, int pid)
 {
 	int	i;
 
@@ -23,6 +23,7 @@ void	wait_childs(int len)
 		wait(NULL);
 		i++;
 	}
+    gl.st = WEXITSTATUS(pid);
 }
 
 void open_pipes(int fd[][2], int n)
@@ -39,7 +40,8 @@ void open_pipes(int fd[][2], int n)
 }
 void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n)
 {
-    pid_t pid;
+    // pid_t pid;
+    int pid;
     int fd[n][2];
     int i;
     int in;
@@ -77,5 +79,5 @@ void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n)
 	dup2(in, STDIN_FILENO);
 	close(out);
 	close(in);
-    wait_childs((n + 1));
+    wait_childs((n + 1),pid);
 }
