@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/08 13:19:19 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/08 14:44:33 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,30 +117,23 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 
 void	ft_execve(t_lexer *lexer, t_env *env)
 {
-	// pid_t	pid;
 	char	**arg_cmd;
 	char	*path;
 
 	arg_cmd = NULL;
 	if ((path = ft_find_path(lexer->content, env)) == NULL)
 		return (gl.st = 127, ft_putendl_fd("Error: command not found", 2));
-	// if ((pid = fork()) == -1)
-	// 	return (perror("fork"));
-	// if (pid == 0)
-	// {
 		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 			arg_cmd = ft_get_full_cmd(lexer);
-		int i = 0;
-		while (arg_cmd[i])
-		{
-			printf("arg %d = %s\n", i, arg_cmd[i]);
-			i++;
-		}
+		// int i = 0;
+		// while (arg_cmd[i])
+		// {
+		// 	printf("arg %d = %s\n", i, arg_cmd[i]);
+		// 	i++;
+		// }
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
 			return (perror("execve"), free(path), ft_free_2d(arg_cmd));
 		free(path);
-	// }
-	// wait(NULL);
 }
 
 // void	ft_execution(t_lexer **lexer, t_env **env)
