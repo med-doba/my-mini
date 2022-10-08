@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/08 14:44:33 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:11:22 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	ft_execution_one_commande(t_lexer **lexer, t_env **env)
 
 void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 {
-	// pid_t	pid;
 	int		pid;
 	char	**arg_cmd;
 	char	*path;
@@ -104,7 +103,9 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 				return (-1);
 		top = top->next;
 	}
-	if ((*lexer)->ch != 'R' && ft_built_in(*lexer, *env) == -1)
+	while (*lexer && (*lexer)->ch == 'R' && (*lexer)->ch != '|')
+		*lexer = (*lexer)->next->next;
+	if ((*lexer)->ch != '|' && ft_built_in(*lexer, *env) == -1)
 		ft_execve(*lexer, *env);
 	if (gl.her_doc == 1)
 		unlink(".her_doc");
@@ -125,12 +126,6 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 		return (gl.st = 127, ft_putendl_fd("Error: command not found", 2));
 		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 			arg_cmd = ft_get_full_cmd(lexer);
-		// int i = 0;
-		// while (arg_cmd[i])
-		// {
-		// 	printf("arg %d = %s\n", i, arg_cmd[i]);
-		// 	i++;
-		// }
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
 			return (perror("execve"), free(path), ft_free_2d(arg_cmd));
 		free(path);
