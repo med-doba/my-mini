@@ -28,6 +28,7 @@ void	ft_pwd(t_env *env)
 		top = top->next;
 	}
 	if (getcwd(pwd, 1024) == NULL)
-		return (perror("getcwd"));
+		return (gl.st = 1, perror("getcwd"));
 	printf("%s\n", pwd);
+	gl.st = 0;
 }

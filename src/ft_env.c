@@ -23,4 +23,5 @@ void	ft_env(t_env *env)
 			printf("%s=%s\n", top->name, top->value);
 		top = top->next;
 	}
+	gl.st = 0;
 }

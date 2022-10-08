@@ -23,18 +23,10 @@ char	**ft_get_full_cmd(t_lexer *lexer)
 	while (tmp && tmp->ch != '|' /*&& tmp->ch != 'R'*/)
 	{
 		if (tmp != NULL && tmp->ch == 'R')
-<<<<<<< HEAD
-=======
-		{
->>>>>>> f8cb679ae136ddaa325e7c73d17d5be5a06531a2
 			tmp = tmp->next->next;
 		if (tmp != NULL && tmp->ch != 'R')
 		{
 			ptr = ft_strjoin(ptr, ft_strjoin(tmp->content, ";"));
-<<<<<<< HEAD
-=======
-			// printf("cmd %s\n", tmp->content);
->>>>>>> f8cb679ae136ddaa325e7c73d17d5be5a06531a2
 			tmp = tmp->next;
 		}
 		if (tmp != NULL)

@@ -24,7 +24,7 @@ void	ft_exit(t_lexer *lexer)
 			if (lexer->next)
 			{
 				if(ft_test_arg_exit(lexer->next->content, lexer->next->ch) != 2)
-					return (ft_putendl_fd("exit\nError: too many arguments", 2));
+					return (gl.st = 1, ft_putendl_fd("exit\nError: too many arguments", 2));
 			}
 			exit(ft_atoi(lexer->content));
 		}
