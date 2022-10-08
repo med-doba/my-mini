@@ -46,6 +46,7 @@ void	ft_echo(t_lexer *lexer)
 	}
 	if (space == 1 && newline == 0)
 		printf("\n");
+	gl.st = 0;
 }
 
 int	ft_check_option_echo(char *str, int *newline)

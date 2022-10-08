@@ -43,13 +43,14 @@ void	ft_export(t_lexer *lexer, t_env **env)
 	{
 		ptr = ft_split_export(lexer->next->content);
 		if (ptr == NULL)
-			return (ft_putendl_fd("not a valid identifier", 2));//khasni free ptr kamlo
+			return (gl.st = 1, ft_putendl_fd("not a valid identifier", 2));//khasni free ptr kamlo
 		ft_inject_var(ptr[0], ptr[1], env);
 		free(ptr);
 		// free(ptr[0]);
 		// free(ptr[1]);
 		lexer->next = lexer->next->next;
 	}
+	gl.st = 0;
 }
 
 void	ft_inject_var(char *name, char *value, t_env **env)

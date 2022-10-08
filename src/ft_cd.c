@@ -27,13 +27,14 @@ void	ft_cd(t_lexer *lexer, t_env **env)
 			if (lexer->ch != 'R')
 			{
 				if (chdir(lexer->content) == -1)
-					return (perror("chdir"));
+					return (gl.st = 1, perror("chdir"));
 				ft_change_pwd_oldpwd(env, oldcwd);
 				break ;
 			}
 			lexer = lexer->next->next;
 		}
 	}
+	gl.st = 0;
 }
 
 void	ft_cd_to_home(t_env **env, char *oldcwd)

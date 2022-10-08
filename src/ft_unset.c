@@ -36,4 +36,5 @@ void	ft_unset(t_lexer *lexer, t_env **env)
 		lexer->next = lexer->next->next;
 	}
 	*env = head;
+	gl.st = 0;
 }
