@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:27:32 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 17:44:46 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:21:06 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ int	ft_check_option_echo(char *str, int *newline)
 			while (ptr[i][j] && ptr[i][j] == 'n')
 				j++;
 			if (ptr[i][j] != '\0')
-				return (free(ptr), 1);
+				return (ft_free_2d(ptr), 1);
 			i++;
 		}
 		if (i > 1)
-			return (free(ptr), 1);
+			return (ft_free_2d(ptr), 1);
 		*newline = 1;
-		return (free(ptr), 2);
+		return (ft_free_2d(ptr), 2);
 	}
-	return (free(ptr), 0);
+	return (0);
 }

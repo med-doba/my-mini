@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:20:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 10:56:15 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:54:54 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_cd(t_lexer *lexer, t_env **env)
 	getcwd(oldcwd, 1024);
 	lexer = lexer->next;
 	if (!lexer)
-		ft_cd_to_home(env, oldcwd);
+		return (gl.st = 1, ft_cd_to_home(env, oldcwd));
 	else if (lexer)
 	{
 		while (lexer && lexer->ch != '|')

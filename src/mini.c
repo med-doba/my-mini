@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:34:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 17:41:03 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:17:54 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_handle(t_env *env)
 		lexer = NULL;
 		gl.sig = 0;
 		rtn = readline("MiniShell>$");
-		rtn = ft_strtrim(rtn, " 	");
+		rtn = ft_strtrim(rtn, " \t");
 		gl.rl_r = rtn;
 		if (rtn == NULL)
 			return (free(rtn), ft_control_d());
