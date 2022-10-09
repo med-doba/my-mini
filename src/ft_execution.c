@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/08 15:26:18 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/09 14:14:57 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 	int		pid;
 	char	**arg_cmd;
 	char	*path;
+	int		status;
 
 	arg_cmd = NULL;
 	if ((path = ft_find_path(lexer->content, env)) == NULL)
@@ -83,8 +84,8 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 			return (perror("execve"), ft_free_2d(arg_cmd), exit(127));
 	}
 	free(path);
-	wait(&pid);
-	gl.st = WEXITSTATUS(pid);
+	waitpid(pid, &status, 0);
+	gl.st = WEXITSTATUS(status);
 }
 
 int	ft_execution_up(t_lexer **lexer, t_env **env)
@@ -113,6 +114,8 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 	dup2(in, STDIN_FILENO);
 	close(out);
 	close(in);
+	if (gl.st != 0)
+		exit(gl.st);
 	return (0);
 }
 
@@ -127,7 +130,7 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 		arg_cmd = ft_get_full_cmd(lexer);
 	if (execve(path, arg_cmd, gl.arg_env) == -1)
-		return (perror("execve"), free(path), ft_free_2d(arg_cmd));
+		return (gl.st = 127, perror("execve"), free(path), ft_free_2d(arg_cmd));
 	free(path);
 }
 

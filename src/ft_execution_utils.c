@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:00:22 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/08 15:09:07 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/09 14:42:05 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*ft_find_path(char *cmd, t_env *env)
 	ptr = NULL;
 	path = NULL;
 	top = env;
+	if (ft_strcmp(cmd, "\0") == 0)
+		return (NULL);
 	if (ft_strncmp(cmd, "./", 2) && ft_strncmp(cmd, "/", 1))
 	{
 		while (top)
