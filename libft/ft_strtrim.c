@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:44:41 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 15:55:36 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/09 15:07:05 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	if (s1[i] == '\0')
 	{
+		free((void *)s1);
 		hub = ft_strdup("");
 		return (hub);
 	}

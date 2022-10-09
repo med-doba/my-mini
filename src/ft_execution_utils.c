@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:00:22 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 14:42:05 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:45:09 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_find_path(char *cmd, t_env *env)
 	ptr = NULL;
 	path = NULL;
 	top = env;
-	if (ft_strcmp(cmd, "\0") == 0)
+	if (cmd[0] == '\0')
 		return (NULL);
 	if (ft_strncmp(cmd, "./", 2) && ft_strncmp(cmd, "/", 1))
 	{

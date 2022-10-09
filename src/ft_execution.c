@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 14:14:57 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:44:34 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,10 @@ void	ft_execution(t_lexer **lexer, t_env **env)
 	pipe = ft_nbr_of_pipes(*lexer);
 	if (pipe == 0)
 	{
-		// while (*lexer)
 		if (*lexer)
 		{
 			if (ft_execution_one_commande(lexer, env) == -1)
 				return ;
-			// while (*lexer && (*lexer)->ch != '|')
-			// 	*lexer = (*lexer)->next;
-			// if (*lexer)
-			// 	*lexer = (*lexer)->next;
 		}
 	}
 	else
@@ -125,7 +120,8 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	char	*path;
 
 	arg_cmd = NULL;
-	if ((path = ft_find_path(lexer->content, env)) == NULL)
+	if ((path = ft_find_path(lexer->content, env)) == NULL || lexer->content[0] == '\0'
+	)
 		return (gl.st = 127, ft_putendl_fd("Error: command not found", 2));
 	if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 		arg_cmd = ft_get_full_cmd(lexer);
