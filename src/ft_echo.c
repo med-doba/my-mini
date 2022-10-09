@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:27:32 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/08 13:30:22 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/09 16:03:57 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,27 @@ void	ft_echo(t_lexer *lexer)
 	firstone = 0;
 	space = 0;
 	newline = 0;
-	if (!lexer->next)
+	if (!lexer->next || lexer->next->ch == 'R')
 		printf("\n");
-	lexer = lexer->next;
-
-	while (lexer && lexer->ch != '|')
+	else
 	{
-		while(lexer && lexer->ch != '|' && lexer->ch == 'R')
-			lexer = lexer->next->next;
-		if (!lexer || lexer->ch == '|')
-		{
-			printf("\n");
-			break ;
-		}
-		if (firstone == 0)
-			while (lexer && ft_check_option_echo(lexer->content, &newline) == 2)
-				lexer = lexer->next;
-		firstone = 1;
-		if (space == 1)
-			printf(" ");
-		printf ("%s", lexer->content);
-		space = 1;
 		lexer = lexer->next;
+		while (lexer && lexer->ch != '|')
+		{
+			while(lexer && lexer->ch != '|' && lexer->ch == 'R')
+				lexer = lexer->next->next;
+			if (!lexer || lexer->ch == '|')
+				break ;
+			if (firstone == 0)
+				while (lexer && ft_check_option_echo(lexer->content, &newline) == 2)
+					lexer = lexer->next;
+			firstone = 1;
+			if (space == 1)
+				printf(" ");
+			printf ("%s", lexer->content);
+			space = 1;
+			lexer = lexer->next;
+		}
 	}
 	if (space == 1 && newline == 0)
 		printf("\n");
