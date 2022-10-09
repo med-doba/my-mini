@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:34:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 18:17:54 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:31:00 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_handle(t_env *env)
 		ft_expand(&lexer, env);
 		ft_parser(&lexer);;
 		if (rtn[0] != '\0')
-			ft_execution(&lexer, &env);
+			ft_execution(lexer, &env);
 		if (lexer != NULL)
 			ft_free_lst(&lexer);
 		free(rtn);

@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/06 21:53:30 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:31:32 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ void	ft_change_pwd_oldpwd(t_env **env, char *cwd);
 void	ft_exit(t_lexer *lexer);
 int		ft_test_arg_exit(char	*str, char ch);
 void	ft_export(t_lexer *lexer, t_env **env);
-void	ft_inject_var(char *name, char *value, t_env **env);
+// void	ft_inject_var(char *name, char *value, t_env **env);
+void	ft_inject_var(char **ptr, t_env **env);
 char	**ft_split_export(char *str);
 void	ft_sort_env(t_env **env);
 void	ft_unset(t_lexer *lexer, t_env **env);
@@ -136,7 +137,7 @@ int		ft_built_in(t_lexer *lexer, t_env *env);
 void	ft_execve(t_lexer *lexer, t_env *env);
 int		ft_execution_up(t_lexer **lexer, t_env **env);
 int		ft_run_redirection(t_lexer *lexer);
-void	ft_execution(t_lexer **lexer, t_env **env);
+void	ft_execution(t_lexer *lexer, t_env **env);
 int		ft_built_in_uppercase(t_lexer *lexer, t_env *env);
 int		ft_built_in_lowercase(t_lexer *lexer, t_env *env);
 char	*ft_find_path(char *cmd, t_env *env);
@@ -147,9 +148,9 @@ int		ft_r_output(char *file);
 int		ft_r_input(char *file);
 char	*ft_collect_path(char	*cmd, char **ptr);
 int		ft_nbr_of_pipes(t_lexer *lexer);
-void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n);
+void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n);
 void	close_pipe(int fd[][2], int n);
-int		ft_execution_one_commande(t_lexer **lexer, t_env **env);
+int		ft_execution_one_commande(t_lexer *lexer, t_env **env);
 void	ft_execve_one_commande(t_lexer *lexer, t_env *env);
 void	open_pipes(int fd[][2], int n);
 #endif

@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:26:24 by med-doba          #+#    #+#             */
-/*   Updated: 2022/09/25 07:27:14 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:42:52 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,37 @@ void	ft_export(t_lexer *lexer, t_env **env)
 			index++;
 		}
 	}
-	while (lexer->next && lexer->next->ch != '|' && lexer->next->ch != 'R')
+	lexer = lexer->next;
+	while (lexer && lexer->ch != '|' && lexer->ch != 'R')
 	{
-		ptr = ft_split_export(lexer->next->content);
+		ptr = ft_split_export(lexer->content);
 		if (ptr == NULL)
-			return (gl.st = 1, ft_putendl_fd("not a valid identifier", 2));//khasni free ptr kamlo
-		ft_inject_var(ptr[0], ptr[1], env);
-		free(ptr);
-		// free(ptr[0]);
-		// free(ptr[1]);
-		lexer->next = lexer->next->next;
+			return (gl.st = 1, ft_putendl_fd("not a valid identifier", 2));
+		// ft_inject_var(ptr[0], ptr[1], env);
+		ft_inject_var(ptr, env);
+		ft_free_2d(ptr);
+		// t_lexer *op = lexer->next;
+		lexer = lexer->next;
+		// op->next = NULL;
+		// ft_free_lst(&op);
 	}
 	gl.st = 0;
 }
 
-void	ft_inject_var(char *name, char *value, t_env **env)
+void	ft_inject_var(char **ptr, t_env **env)
 {
 	t_env	*head;
 	int		already_exists;
+	t_env	*node;
 
 	head = *env;
 	already_exists = 0;
 	while (*env)
 	{
-		if (ft_strcmp((*env)->name, name) == 0)
+		if (ft_strcmp((*env)->name, ptr[0]) == 0)
 		{
 			free((*env)->value);
-			(*env)->value = ft_strdup(value);
+			(*env)->value = ft_strdup(ptr[1]);
 			already_exists = 1;
 		}
 		(*env) = (*env)->next;
@@ -73,7 +77,9 @@ void	ft_inject_var(char *name, char *value, t_env **env)
 	*env = head;
 	if (already_exists == 0)
 	{
-		ft_lstadd_back_env(env, ft_lstnew_env(name, value));
+		node = ft_lstnew_env(ptr[0], ptr[1]);
+		if (node)
+			ft_lstadd_back_env(env, node);
 	}
 }
 
@@ -83,7 +89,6 @@ char	**ft_split_export(char *str)
 	char	**ptr;
 
 	i = 0;
-	ptr = malloc(sizeof(char *) * 2);
 	while (str[i] && str[i] != '=')
 	{
 		if (str[0] >= '0' && str[0] <= '9')
@@ -93,14 +98,14 @@ char	**ft_split_export(char *str)
 		i++;
 	}
 	i = 0;
-	ptr[0] = ft_strdup("");
+	ptr = (char**)malloc(sizeof(char *) * 3);//leaks
+	ptr[2] = NULL;
+	ptr[0] = ft_strdup("");//leaks
 	while (str[i] && str[i] != '=')
 		ptr[0] = ft_join(ptr[0], str[i++]);
+	ptr[1] = ft_strdup("");
 	if (str[i] != '\0')
-	{
 		i++;
-		ptr[1] = ft_strdup("");
-	}
 	while (str[i])
 		ptr[1] = ft_join(ptr[1], str[i++]);
 	return (ptr);

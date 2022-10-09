@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:55:46 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/09 16:03:27 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:31:47 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void open_pipes(int fd[][2], int n)
 		i++;
 	}
 }
-void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n)
+void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 {
 	// pid_t pid;
 	int pid;
@@ -61,12 +61,14 @@ void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n)
 	int in;
 	int out;
 	int status;
+	t_lexer	*top;
 
 	open_pipes(fd, n);
 	i = 0;
+	top = lexer;
 	out = dup(STDOUT_FILENO);
 	in = dup(STDIN_FILENO);
-	while(*lexer)
+	while(top)
 	{
 		gl.sig = 1;
 		pid = fork();
@@ -79,17 +81,17 @@ void	ft_execute_pipe(t_lexer **lexer, t_env **env, int n)
 			if (i != 0)
 				dup2(fd[i-1][0], 0);
 			close_pipe(fd, n);
-			if (ft_execution_up(lexer, env) == -1)
+			if (ft_execution_up(&top, env) == -1)
 				return (exit(1));
 			exit(0);
 		}
 		close(fd[i][1]);
 		wait(&status);
 		gl.st = WEXITSTATUS(status);
-		while (*lexer && (*lexer)->ch != '|')
-			*lexer = (*lexer)->next;
-		if (*lexer)
-			*lexer = (*lexer)->next;
+		while (top && (top)->ch != '|')
+			top = (top)->next;
+		if (top)
+			top = (top)->next;
 		i++;
 	}
 	close_pipe(fd, n);
