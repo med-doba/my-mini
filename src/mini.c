@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:34:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 21:31:00 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:28:09 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	ft_init_global();
+	printf("%s\n", envp[0]);
 	signal(2, ft_sighandler);
 	signal(3, SIG_IGN);
 	signal(3, ft_sighandler);
