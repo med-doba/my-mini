@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:00:22 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 17:45:09 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/10 13:29:18 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	**ft_get_full_cmd(t_lexer *lexer)
 {
 	char	*ptr;
+	char	*join;
 	char	**two;
 	t_lexer *tmp;
 
@@ -26,12 +27,9 @@ char	**ft_get_full_cmd(t_lexer *lexer)
 			tmp = tmp->next->next;
 		if (tmp != NULL && tmp->ch != 'R' && tmp->ch != '|')
 		{
-			ptr = ft_strjoin(ptr, ft_strjoin(tmp->content, ";"));
-			tmp = tmp->next;
-		}
-		if (tmp != NULL && tmp->ch != 'R' && tmp->ch != '|')
-		{
-			ptr = ft_strjoin(ptr, ft_strjoin(tmp->content, ";"));
+			join = ft_strjoin(tmp->content, ";");
+			ptr = ft_strjoin(ptr, join);
+			free(join);
 			tmp = tmp->next;
 		}
 		if (tmp != NULL && tmp->ch != '|')
