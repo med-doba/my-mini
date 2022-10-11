@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/11 11:33:31 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:21:43 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,13 @@ void	ft_sort_env(t_env **env);
 void	ft_unset(t_lexer *lexer, t_env **env);
 //execution
 void	ft_collect_cmd(t_lexer **lexer, t_env **env);
-int		ft_built_in(t_lexer *lexer, t_env *env);
+int		ft_built_in(t_lexer *lexer, t_env **env);
 void	ft_execve(t_lexer *lexer, t_env *env);
 int		ft_execution_up(t_lexer **lexer, t_env **env);
 int		ft_run_redirection(t_lexer *lexer);
 void	ft_execution(t_lexer *lexer, t_env **env);
-int		ft_built_in_uppercase(t_lexer *lexer, t_env *env);
-int		ft_built_in_lowercase(t_lexer *lexer, t_env *env);
+int		ft_built_in_uppercase(t_lexer *lexer, t_env **env);
+int		ft_built_in_lowercase(t_lexer *lexer, t_env **env);
 char	*ft_find_path(char *cmd, t_env *env);
 char	**ft_get_full_cmd(t_lexer *lexer);
 int		ft_her_duc(char	*delimiter);

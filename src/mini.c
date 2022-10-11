@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:34:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/11 12:19:50 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:22:05 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	ft_init_global();
+	printf("%s\n", envp[0]);
 	signal(2, ft_sighandler);
 	signal(3, SIG_IGN);
 	signal(3, ft_sighandler);

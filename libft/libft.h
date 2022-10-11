@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:34:02 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/11 11:19:03 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:21:29 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-long	ft_atoi(const char *str);
+long	ft_atoi(char *str);
 int		ft_strcmp(char *s1, char *s2);
 //malloc
 char	*ft_strdup(const char *s1);

@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:27:32 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 18:21:06 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:33:57 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ void	ft_echo(t_lexer *lexer)
 			firstone = 1;
 			if (space == 1)
 				printf(" ");
-			printf ("%s", lexer->content);
+			if (lexer)
+				printf ("%s", lexer->content);
 			space = 1;
-			lexer = lexer->next;
+			if (lexer)
+				lexer = lexer->next;
 		}
 	}
 	if (space == 1 && newline == 0)
