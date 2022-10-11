@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/11 12:32:30 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/11 18:18:01 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void	ft_inject_var(char **ptr, t_env **env);
 char	**ft_split_export(char *str);
 void	ft_sort_env(t_env **env);
 void	ft_unset(t_lexer *lexer, t_env **env);
+//gnl
+char	*get_next_line(int fd);
 //execution
 void	ft_collect_cmd(t_lexer **lexer, t_env **env);
 int		ft_built_in(t_lexer *lexer, t_env **env);

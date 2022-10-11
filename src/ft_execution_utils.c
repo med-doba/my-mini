@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:00:22 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/11 12:54:00 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/11 18:40:53 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,14 @@ char	**ft_get_full_cmd(t_lexer *lexer)
 			free(join);
 			tmp = tmp->next;
 		}
-		if (tmp != NULL && tmp->ch != '|')
-		{
-			if (tmp && ft_strcmp(tmp->content, "<<") == 0)
-			{
-				ptr = ft_strjoin(ptr, ".her_doc");
-				//  ptr = ft_strjoin(ptr, gl.herdoc);
-				tmp = tmp->next->next;
-			}
-		}
+		// if (tmp != NULL && tmp->ch != '|')
+		// {
+		// 	if (tmp && ft_strcmp(tmp->content, "<<") == 0)
+		// 	{
+		// 		ptr = ft_strjoin(ptr, ".her_doc");
+		// 		tmp = tmp->next->next;
+		// 	}
+		// }
 	}
 	two = ft_split(ptr, ';');
 	return (free(ptr), two);
