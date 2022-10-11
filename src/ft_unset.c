@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:32:13 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/10 23:51:51 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:03:55 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ void	ft_unset(t_lexer *lexer, t_env **env)
 	t_env	*head;
 	t_env	*tmp_prev;
 	t_env	*tmp_next;
-	t_env	*tmp;
-
-	tmp_prev = NULL;
-	tmp_next = NULL;
+ 
 	head = *env;
 	lexer = lexer->next;
 	while (lexer)
 	{
+		tmp_prev = NULL;
+		tmp_next = NULL;
 		while (*env)
 		{
 			tmp_next = (*env)->next;
@@ -32,33 +31,14 @@ void	ft_unset(t_lexer *lexer, t_env **env)
 			{
 				free((*env)->name);
 				free((*env)->value);
-				tmp = (*env)->next;
 				free(*env);
-			// }
 				if (!tmp_prev)
-				{
-					printf("0\n");
-					*env = tmp;
-					head = *env;
-					printf("env = %s\n", (*env)->name);
-					// break;
-				}
+					head = tmp_next;
 				else if (!tmp_next)
-				{
-					printf("1\n");
-					*env = tmp_prev;
-					(*env)->next = NULL;
-					printf("env = %s\n", (*env)->name);
-					// break;
-				}
+					tmp_prev->next = NULL;
 				else
-				{
-					printf("2\n");
-					exit(1);
-					*env = tmp_prev;
-					(*env)->next = tmp;
-					// break;
-				}
+					tmp_prev->next = tmp_next;
+				break ;
 			}
 			tmp_prev = *env;
 			*env = (*env)->next;
@@ -66,6 +46,5 @@ void	ft_unset(t_lexer *lexer, t_env **env)
 		*env = head;
 		lexer = lexer->next;
 	}
-	*env = head;
 	gl.st = 0;
 }

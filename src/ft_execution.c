@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/10 14:10:50 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:08:19 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_execution_one_commande(t_lexer *lexer, t_env **env)
 	}
 	while (lexer && (lexer)->ch == 'R' && (lexer)->ch != '|')
 		lexer = (lexer)->next->next;
-	if (lexer && (lexer)->ch != '|' && ft_built_in(lexer, *env) == -1)
+	if (lexer && (lexer)->ch != '|' && ft_built_in(lexer, env) == -1)
 		ft_execve_one_commande(lexer, *env);
 	if (gl.her_doc == 1)
 		unlink(".her_doc");
@@ -101,7 +101,7 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 	}
 	while (*lexer && (*lexer)->ch == 'R' && (*lexer)->ch != '|')
 		*lexer = (*lexer)->next->next;
-	if ((*lexer)->ch != '|' && ft_built_in(*lexer, *env) == -1)
+	if ((*lexer)->ch != '|' && ft_built_in(*lexer, env) == -1)
 		ft_execve(*lexer, *env);
 	if (gl.her_doc == 1)
 		unlink(".her_doc");
