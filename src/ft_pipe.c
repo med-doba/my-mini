@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:55:46 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/09 21:31:47 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:11:33 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 	int i;
 	int in;
 	int out;
-	int status;
+	// int status;
 	t_lexer	*top;
 
 	open_pipes(fd, n);
@@ -86,8 +86,8 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 			exit(0);
 		}
 		close(fd[i][1]);
-		wait(&status);
-		gl.st = WEXITSTATUS(status);
+		// wait(&status);
+		// gl.st = WEXITSTATUS(status);
 		while (top && (top)->ch != '|')
 			top = (top)->next;
 		if (top)
@@ -102,13 +102,14 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 	// wait_childs((n + 1),pid);
 
 
-	// i = 0;
-	// while (i <= n)
-	// {
-	// 	wait(&status);
-	// 	// waitpid(-1,&status,0);
-	// 	gl.st = WEXITSTATUS(status);
-	// 	// printf("exit status %d\n",gl.st);
-	// 	i++;
-	// }
+	i = 0;
+	while (i <= n)
+	{
+		wait(NULL);
+		// waitpid(-1,&status,0);
+		// printf("exit status %d\n",gl.st);
+		i++;
+	}
+	printf("pid = %d\n", gl.pid);
+	gl.st = WEXITSTATUS(gl.pid);
 }

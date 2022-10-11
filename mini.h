@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 21:31:32 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:33:31 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 struct s_global
 {
+	int		pid;
 	int		fd_file;
 	int		sig;
 	int		her_doc;
@@ -39,14 +40,6 @@ struct s_global
 	int		in;
 	int		out;
 } gl;
-
-typedef struct fds
-{
-	int		in;
-	int		out;
-	int		*fd;
-	int		flag;
-}	t_fds;
 
 typedef struct lexer{
 	char			*content;
@@ -69,6 +62,7 @@ void	ft_header(void);
 void	ft_handle(t_env *env);
 void	ft_control_d(void);
 void	ft_sighandler(int sig);
+char	**convert_list(t_env *env);
 //expand
 int		ft_expand_herdoc(t_lexer **lexer);
 void	ft_expand(t_lexer **lexer, t_env *env);

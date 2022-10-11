@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 21:30:37 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:38:58 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 	{
 		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 			arg_cmd = ft_get_full_cmd(lexer);
+		if ((gl.arg_env = convert_list(env)) == NULL)
+			return (perror("malloc"), ft_free_2d(arg_cmd), exit(127));
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
 			return (perror("execve"), ft_free_2d(arg_cmd), exit(127));
 	}
@@ -125,6 +127,8 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 		return (gl.st = 127, ft_putendl_fd("Error: command not found", 2));
 	if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 		arg_cmd = ft_get_full_cmd(lexer);
+	if ((gl.arg_env = convert_list(env)) == NULL)
+		return (perror("malloc"), ft_free_2d(arg_cmd), exit(127));
 	if (execve(path, arg_cmd, gl.arg_env) == -1)
 		return (gl.st = 127, perror("execve"), free(path), ft_free_2d(arg_cmd));
 	free(path);
