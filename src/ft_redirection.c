@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:50:16 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/10 14:11:11 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:57:04 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,40 @@ int	ft_append(char *file)
 int	ft_her_duc(char	*delimiter)
 {
 	// int		fd;
-	char	*line;
+	// char	*line;
+	char	*ptr;
+	int 	condition;
 
 
 	// if (unlink(".her_doc"))
-		if ((gl.fd_file = open(".her_doc", O_RDWR | O_CREAT, 0666)) == -1)
-			return (perror("open"), -1);
+		// if ((gl.fd_file = open(".her_doc", O_RDWR | O_CREAT, 0666)) == -1)
+		// 	return (perror("open"), -1);
 	gl.her_doc = 1;
+	condition = 0;
+	ptr = ft_strdup("");
 	while (1)
 	{
-		line = readline("> ");
-		if (!line || !ft_strcmp(line, delimiter))
-			return (free(line), 0);
-		ft_putendl_fd(line, gl.fd_file);
-		free(line);
+		// line = readline("> ");
+		gl.herdoc = readline("> ");
+		// if (!line || !ft_strcmp(line, delimiter))
+		// 	return (free(line), 0);
+		if (!gl.herdoc || !ft_strcmp(gl.herdoc, delimiter))
+		{
+			gl.herdoc = ptr;
+			if ((gl.fd_file = open(".her_doc", O_RDWR | O_CREAT, 0666)) == -1)
+				return (perror("open"), -1);
+			ft_putendl_fd(gl.herdoc, gl.fd_file);
+			return (free(gl.herdoc), 0);
+		}
+		if (condition == 1)
+			ptr = ft_strjoin(ptr, "\n");
+		ptr = ft_strjoin(ptr, gl.herdoc);
+		condition = 1;
+		// ft_putendl_fd(line, gl.fd_file);
+		// free(line);
+		free(gl.herdoc);
 	}
+	// printf("hna %s\n", ptr);
+	// gl.herdoc = ptr;
 	return (0);
 }

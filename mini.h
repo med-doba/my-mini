@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/11 12:21:43 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:32:30 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ struct s_global
 	char	**arg_env;
 	int		in;
 	int		out;
+	char	*herdoc;
 } gl;
 
 typedef struct lexer{
