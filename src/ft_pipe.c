@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:55:46 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/10 23:11:33 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:30:42 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void open_pipes(int fd[][2], int n)
 void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 {
 	// pid_t pid;
-	int pid;
+	// int pid;
 	int fd[n][2];
 	int i;
 	int in;
 	int out;
-	// int status;
+	int status;
 	t_lexer	*top;
 
 	open_pipes(fd, n);
@@ -71,10 +71,10 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 	while(top)
 	{
 		gl.sig = 1;
-		pid = fork();
-		if (pid == -1)
+		gl.pid = fork();
+		if (gl.pid == -1)
 			return (perror("fork pipe"));
-		if (pid == 0)
+		if (gl.pid == 0)
 		{
 			if (i < n)
 				dup2(fd[i][1],1);
@@ -102,14 +102,14 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 	// wait_childs((n + 1),pid);
 
 
+	waitpid(gl.pid,&status,0);
+	gl.st = WEXITSTATUS(status);
 	i = 0;
-	while (i <= n)
+	while (i < n)
 	{
 		wait(NULL);
 		// waitpid(-1,&status,0);
 		// printf("exit status %d\n",gl.st);
 		i++;
 	}
-	printf("pid = %d\n", gl.pid);
-	gl.st = WEXITSTATUS(gl.pid);
 }
