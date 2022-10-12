@@ -1,38 +1,89 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.c                                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 18:17:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/11 18:52:25 by med-doba         ###   ########.fr       */
+/*   Created: 2022/10/12 14:46:00 by med-doba          #+#    #+#             */
+/*   Updated: 2022/10/12 14:48:33 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
-char *get_next_line(int fd)
+static int	get_line(char *str)
 {
-	char buffer[2];
-	char *line;
+	int	i;
 
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+static void	free_all(char **str)
+{
+	free (*str);
+	*str = NULL;
+}
+
+static char	*fill_line(char **rem,	int a)
+{
+	char	*line;
+	char	*tmp;
+	int		index;
+
+	tmp = NULL;
+	index = get_line(*rem);
+	if (a == 0 && *(*rem) == '\0')
+		return (free_all(rem), NULL);
+	else if ((*rem)[index] == '\n')
+	{
+		line = (char *)malloc(sizeof(char) * (index + 2));
+		if (line == NULL)
+			return (free_all(&line), NULL);
+		ft_memcpy(line, *rem, index);
+		line[index] = '\n';
+		line[index + 1] = '\0';
+		tmp = ft_strdup(*rem + index + 1);
+		free_all(rem);
+		*rem = tmp;
+		return (line);
+	}
+	line = ft_strdup(*rem);
+	free_all(rem);
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	int			i;
+	char		*buff;
+	static char	*rem = NULL;
+
+	i = 1;
 	if (fd < 0)
 		return (NULL);
-	// line = (char *)malloc(sizeof(char) * 1);
-	// line[0] = '\0';
-	line = ft_strdup("");
-	while (read(fd, buffer, 1) != 0)
+	buff = (char *)malloc(sizeof(char) * (1));
+	if (buff == NULL)
+		return (free_all(&buff), NULL);
+	while (i > 0)
 	{
-		if (buffer[0] == '\n')
-		{
-			line = ft_strjoin2(line, buffer);
-			return (line);
-		}
+		i = read(fd, buff, 1);
+		if (i < 0)
+			return (free_all(&buff), NULL);
+		buff[i] = '\0';
+		if (!rem)
+			rem = ft_strdup(buff);
 		else
-			line = ft_strjoin2(line, buffer);
+			rem = ft_strjoin(rem, buff);
+		if (get_line(rem) != -1)
+			break ;
 	}
-	if (line[0] != '\0')
-		return (ft_strjoin2(line,"\n"));
-	return (free(line), NULL);
+	return (free_all(&buff), fill_line(&rem, i));
 }
