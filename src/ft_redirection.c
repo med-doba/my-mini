@@ -6,15 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:50:16 by med-doba          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2022/10/13 09:31:53 by med-doba         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/12 15:22:23 by med-doba         ###   ########.fr       */
->>>>>>> a720d58ce5eefc4df2b56434961722cd5fa7af8b
-=======
-/*   Updated: 2022/10/13 10:09:10 by med-doba         ###   ########.fr       */
->>>>>>> f694ddc4733f14e23dee4be36ac83eeefd590806
+/*   Updated: 2022/10/13 13:38:38 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,58 +34,67 @@ int	ft_run_redirection(t_lexer *lexer)
 
 int	ft_r_input(char *file)
 {
-	if ((gl.fd_file = open(file, O_RDONLY, 0666)) == -1)
+	close(gl.fd_in);
+	if ((gl.fd_in = open(file, O_RDONLY, 0666)) == -1)
 		return (perror("open"), -1);
-	dup2(gl.fd_file, 0);
-	close(gl.fd_file);
+	// dup2(gl.fd_file, 0);
+	gl.fd_file = -1;
 	return (0);
 }
 
 int	ft_r_output(char *file)
 {
-	if ((gl.fd_file = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1)
+	close(gl.fd_out);
+	if ((gl.fd_out = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1)
 		return (perror("open"), -1);
-	dup2(gl.fd_file, 1);
-	close(gl.fd_file);
+	// dup2(gl.fd_file, 1);
+	// close(gl.fd_file);
+	gl.fd_file = -2;
+
 	return (0);
 }
 
 int	ft_append(char *file)
 {
-	if ((gl.fd_file = open(file, O_RDWR | O_CREAT | O_APPEND, 0666)) == -1)
+	close(gl.fd_out);
+	if ((gl.fd_out = open(file, O_RDWR | O_CREAT | O_APPEND, 0666)) == -1)
 		return (perror("open"), -1);
-	dup2(gl.fd_file, 1);
-	close(gl.fd_file);
+	// dup2(gl.fd_file, 1);
+	// close(gl.fd_file);
+	gl.fd_file = -2;
+
 	return (0);
 }
 
 int	ft_her_duc(char	*delimiter)
 {
 	char	*ptr;
+	// char	**tab;
+	// int		i;
 	char	*tmp;
 
+	// i = 0;
 	ptr = ft_strdup("");
-	delimiter = ft_strjoin2(delimiter, "\n");
+	unlink("tmp");
 	while (1)
 	{
-<<<<<<< HEAD
-		tmp = get_next_line(0);
-=======
 		tmp = readline("> ");
->>>>>>> f694ddc4733f14e23dee4be36ac83eeefd590806
 		if (!tmp || !ft_strcmp(tmp, delimiter))
 		{
 			free(tmp);
-			if ((gl.fd_file = open("tmp", O_WRONLY | O_CREAT, 0666)) == -1)
+			close(gl.fd_in);
+			if ((gl.fd_in = open("tmp", O_WRONLY | O_CREAT, 0666)) == -1)
 				return (free(ptr), perror("open"), -1);
 			gl.her_doc = 1;
-			ft_putstr_fd(ptr, gl.fd_file);
-			close(gl.fd_file);
-			gl.fd_file = open("tmp", O_RDONLY);
-			dup2(gl.fd_file, 0);
-			close(gl.fd_file);
+			ft_putstr_fd(ptr, gl.fd_in);
+			close(gl.fd_in);
+			gl.fd_in = open("tmp", O_RDONLY);
+			// dup2(gl.fd_file, 0);
+			// close(gl.fd_file);
+			gl.fd_file = -1;
 			return (free(ptr), 1);
 		}
+		tmp = ft_strjoin(tmp, "\n");
 		ptr = ft_strjoin(ptr, tmp);
 		free(tmp);
 	}

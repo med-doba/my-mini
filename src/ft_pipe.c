@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:55:46 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/13 10:08:31 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:18:45 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void open_pipes(int fd[][2], int n)
 }
 void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 {
-	// pid_t pid;
-	// int pid;
 	int fd[n][2];
 	int i;
 	int in;
@@ -86,10 +84,15 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 			exit(0);
 		}
 		close(fd[i][1]);
-		// wait(&status);
-		// gl.st = WEXITSTATUS(status);
 		while (top && (top)->ch != '|')
+		{
+			if (ft_strcmp(top->content,"<<") == 0)
+			{
+				printf("dkhal\n");
+				wait(NULL);
+			}
 			top = (top)->next;
+		}
 		if (top)
 			top = (top)->next;
 		i++;
@@ -99,7 +102,6 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 	dup2(in, STDIN_FILENO);
 	close(out);
 	close(in);
-	// wait_childs((n + 1),pid);
 
 
 	waitpid(gl.pid,&status,0);
@@ -108,8 +110,6 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 	while (i < n)
 	{
 		wait(NULL);
-		// waitpid(-1,&status,0);
-		// printf("exit status %d\n",gl.st);
 		i++;
 	}
 }
