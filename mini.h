@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/11 18:18:01 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:47:20 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,10 @@ void	ft_sort_env(t_env **env);
 void	ft_unset(t_lexer *lexer, t_env **env);
 //gnl
 char	*get_next_line(int fd);
+// char	*ft_strdup(const char *src);
+// char	*ft_strjoin(char const *s1,	char const *s2);
+// void	*ft_memcpy(void *dest,	const void *src,	size_t size);
+// size_t	ft_strlen(char const	*str);
 //execution
 void	ft_collect_cmd(t_lexer **lexer, t_env **env);
 int		ft_built_in(t_lexer *lexer, t_env **env);
