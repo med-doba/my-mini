@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 12:08:25 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:17:59 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,13 @@ void	ft_collect_cmd(t_lexer **lexer, t_env **env);
 int		ft_built_in(t_lexer *lexer, t_env **env);
 void	ft_execve(t_lexer *lexer, t_env *env);
 int		ft_execution_up(t_lexer **lexer, t_env **env);
-int		ft_run_redirection(t_lexer *lexer);
+int		ft_run_redirection(t_lexer *lexer, t_env *env);
 void	ft_execution(t_lexer *lexer, t_env **env);
 int		ft_built_in_uppercase(t_lexer *lexer, t_env **env);
 int		ft_built_in_lowercase(t_lexer *lexer, t_env **env);
 char	*ft_find_path(char *cmd, t_env *env);
 char	**ft_get_full_cmd(t_lexer *lexer);
-int		ft_her_duc(char	*delimiter);
+int		ft_her_duc(char	*delimiter, t_env *env);
 int		ft_append(char *file);
 int		ft_r_output(char *file);
 int		ft_r_input(char *file);

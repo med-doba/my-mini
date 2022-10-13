@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 13:37:42 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:19:49 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_execution_one_commande(t_lexer *lexer, t_env **env)
 	while (top && top->ch != '|')
 	{
 		if (top->ch == 'R')
-			if (ft_run_redirection(top) == -1)
+			if (ft_run_redirection(top, *env) == -1)
 				return (-1);
 		top = top->next;
 	}
@@ -102,7 +102,7 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 	while (top && top->ch != '|')
 	{
 		if (top->ch == 'R')
-			if (ft_run_redirection(top) == -1)
+			if (ft_run_redirection(top, *env) == -1)
 				return (-1);
 		top = top->next;
 	}
