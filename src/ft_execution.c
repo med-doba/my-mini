@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/12 21:49:43 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:18:14 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 	if ((*lexer)->ch != '|' && ft_built_in(*lexer, env) == -1)
 		ft_execve(*lexer, *env);
 	if (gl.her_doc == 1)
-		unlink(".her_doc");
+		unlink("tmp");
 	dup2(out, STDOUT_FILENO);
 	dup2(in, STDIN_FILENO);
 	close(out);
