@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:50:16 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 12:10:33 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:36:08 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ int	ft_r_input(char *file)
 
 int	ft_r_output(char *file)
 {
+	// printf("lol1 == %d\n", gl.fd_out);
 	close(gl.fd_out);
 	if ((gl.fd_out = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1)
 		return (perror("open"), -1);
+	// printf("lol2 == %d\n", gl.fd_out);
 	// dup2(gl.fd_file, 1);
 	// close(gl.fd_file);
 	gl.fd_file = -2;

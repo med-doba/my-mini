@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:55:46 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/13 13:18:45 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:37:59 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 	int i;
 	int in;
 	int out;
-	int status;
+	// int status;
 	t_lexer	*top;
+	t_lexer	*top1;
 
 	open_pipes(fd, n);
 	i = 0;
@@ -68,46 +69,66 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
 	in = dup(STDIN_FILENO);
 	while(top)
 	{
+		gl.fd_out = dup(STDOUT_FILENO);
+		gl.fd_in = dup(STDIN_FILENO);
+		if (i < n)
+		{
+			close(gl.fd_out);
+			gl.fd_out = dup(fd[i][1]);
+			close(fd[i][1]);
+		}
+		if (i != 0)
+		{
+			close(gl.fd_in);
+			gl.fd_in = dup(fd[i - 1][0]);
+			close(fd[i - 1][0]);
+		}
+		top1 = top;
+		while (top1 && top1->ch != '|')
+		{
+			if (top1->ch == 'R')
+			{
+				if (ft_run_redirection(top1) == -1)
+					return ;
+			}
+			top1 = top1->next;
+		}
 		gl.sig = 1;
 		gl.pid = fork();
 		if (gl.pid == -1)
 			return (perror("fork pipe"));
 		if (gl.pid == 0)
 		{
-			if (i < n)
-				dup2(fd[i][1],1);
-			if (i != 0)
-				dup2(fd[i-1][0], 0);
+			dup2(gl.fd_in, 0);
+			dup2(gl.fd_out, 1);
 			close_pipe(fd, n);
+			close(gl.fd_in);
+			close(gl.fd_out);
 			if (ft_execution_up(&top, env) == -1)
 				return (exit(1));
+			if (gl.her_doc == 1)
+				unlink("tmp");
 			exit(0);
 		}
-		close(fd[i][1]);
+		close(gl.fd_in);
+		close(gl.fd_out);
+		// dup2(out, STDOUT_FILENO);
+		// dup2(in, STDIN_FILENO);
 		while (top && (top)->ch != '|')
-		{
-			if (ft_strcmp(top->content,"<<") == 0)
-			{
-				printf("dkhal\n");
-				wait(NULL);
-			}
 			top = (top)->next;
-		}
 		if (top)
 			top = (top)->next;
 		i++;
 	}
 	close_pipe(fd, n);
-	dup2(out, STDOUT_FILENO);
-	dup2(in, STDIN_FILENO);
 	close(out);
 	close(in);
 
 
-	waitpid(gl.pid,&status,0);
-	gl.st = WEXITSTATUS(status);
+	// waitpid(gl.pid,&status,0);
+	// gl.st = WEXITSTATUS(status);
 	i = 0;
-	while (i < n)
+	while (i <= n)
 	{
 		wait(NULL);
 		i++;
