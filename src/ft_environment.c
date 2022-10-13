@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 10:57:18 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 16:32:22 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:51:33 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ void	ft_while_env(t_env **env, char **envp, t_env **node, int *i)
 	char	**ptr;
 
 	ptr = ft_split(envp[*i], '=');
-	if (ft_strcmp(ptr[0], "OLDPWD") == 0)
-	{
-		printf("%s\n", ptr[0]);
-		printf("%s\n", ptr[1]);
-	}
 	*node = ft_lstnew_env(ptr[0], ptr[1]);
 	ft_lstadd_back_env(env, *node);
 	(*i)++;
