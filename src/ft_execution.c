@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/12 23:55:05 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/13 12:32:02 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ int	ft_execution_one_commande(t_lexer *lexer, t_env **env)
 	t_lexer	*top;
 	int		out;
 	int		in;
-
 	top = lexer;
-	out = dup(STDOUT_FILENO);
 	in = dup(STDIN_FILENO);
+	out = dup(STDOUT_FILENO);
+	gl.fd_out = dup(STDOUT_FILENO);
+	gl.fd_in = dup(STDIN_FILENO);
 	while (top && top->ch != '|')
 	{
 		if (top->ch == 'R')
@@ -45,6 +46,8 @@ int	ft_execution_one_commande(t_lexer *lexer, t_env **env)
 				return (-1);
 		top = top->next;
 	}
+	dup2(gl.fd_in, 0);
+	dup2(gl.fd_out, 1);
 	while (lexer && (lexer)->ch == 'R' && (lexer)->ch != '|')
 		lexer = (lexer)->next->next;
 	if (lexer && (lexer)->ch != '|' && ft_built_in(lexer, env) == -1)
@@ -94,6 +97,8 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 	top = *lexer;
 	out = dup(STDOUT_FILENO);
 	in = dup(STDIN_FILENO);
+	gl.fd_out = dup(STDOUT_FILENO);
+	gl.fd_in = dup(STDIN_FILENO);
 	while (top && top->ch != '|')
 	{
 		if (top->ch == 'R')
@@ -101,12 +106,14 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 				return (-1);
 		top = top->next;
 	}
+	dup2(gl.fd_in, 0);
+	dup2(gl.fd_out, 1);
 	while (*lexer && (*lexer)->ch == 'R' && (*lexer)->ch != '|')
 		*lexer = (*lexer)->next->next;
 	if ((*lexer)->ch != '|' && ft_built_in(*lexer, env) == -1)
 		ft_execve(*lexer, *env);
-	if (gl.her_doc == 1)
-		unlink("tmp");
+	// if (gl.her_doc == 1)
+	// 	unlink("tmp");
 	dup2(out, STDOUT_FILENO);
 	dup2(in, STDIN_FILENO);
 	close(out);
