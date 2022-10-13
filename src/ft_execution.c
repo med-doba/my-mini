@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 14:06:11 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:42:56 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	ft_execution_one_commande(t_lexer *lexer, t_env **env)
 		lexer = (lexer)->next->next;
 	if (lexer && (lexer)->ch != '|' && ft_built_in(lexer, env) == -1)
 		ft_execve_one_commande(lexer, *env);
-	if (gl.her_doc == 1)
-		unlink("tmp");
+	// if (gl.her_doc == 1)
+	// 	unlink(".her_doc");
 	dup2(out, STDOUT_FILENO);
 	dup2(in, STDIN_FILENO);
 	close(out);

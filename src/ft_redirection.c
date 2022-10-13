@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:50:16 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 14:36:08 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:42:51 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,11 @@ int	ft_append(char *file)
 int	ft_her_duc(char	*delimiter)
 {
 	char	*ptr;
+	// char	**tab;
+	// int		i;
 	char	*tmp;
 
+	// i = 0;
 	ptr = ft_strdup("");
 	unlink("tmp");
 	while (1)
