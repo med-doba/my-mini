@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:50:16 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 10:09:10 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:30:46 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ int	ft_append(char *file)
 int	ft_her_duc(char	*delimiter)
 {
 	char	*ptr;
+	// char	**tab;
+	// int		i;
 	char	*tmp;
 
+	// i = 0;
 	ptr = ft_strdup("");
 	delimiter = ft_strjoin2(delimiter, "\n");
 	while (1)
@@ -82,6 +85,12 @@ int	ft_her_duc(char	*delimiter)
 			close(gl.fd_file);
 			return (free(ptr), 1);
 		}
+		// tab = ft(tmp, " ");
+		// while (tab[i])
+		// {
+		// 	tab[i] = ft_strtrim(tab[i], "\"\'");
+		// 	i++;
+		// }
 		ptr = ft_strjoin(ptr, tmp);
 		free(tmp);
 	}
