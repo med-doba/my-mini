@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 16:19:49 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:36:21 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,33 +91,33 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 int	ft_execution_up(t_lexer **lexer, t_env **env)
 {
 	t_lexer	*top;
-	int		out;
-	int		in;
+	// int		out;
+	// int		in;
 
 	top = *lexer;
-	out = dup(STDOUT_FILENO);
-	in = dup(STDIN_FILENO);
-	gl.fd_out = dup(STDOUT_FILENO);
-	gl.fd_in = dup(STDIN_FILENO);
-	while (top && top->ch != '|')
-	{
-		if (top->ch == 'R')
-			if (ft_run_redirection(top, *env) == -1)
-				return (-1);
-		top = top->next;
-	}
-	dup2(gl.fd_in, 0);
-	dup2(gl.fd_out, 1);
+	// out = dup(STDOUT_FILENO);
+	// in = dup(STDIN_FILENO);
+	// gl.fd_out = dup(STDOUT_FILENO);
+	// gl.fd_in = dup(STDIN_FILENO);
+	// while (top && top->ch != '|')
+	// {
+	// 	if (top->ch == 'R')
+	// 		if (ft_run_redirection(top) == -1)
+	// 			return (-1);
+	// 	top = top->next;
+	// }
+	// dup2(gl.fd_in, 0);
+	// dup2(gl.fd_out, 1);
 	while (*lexer && (*lexer)->ch == 'R' && (*lexer)->ch != '|')
 		*lexer = (*lexer)->next->next;
 	if ((*lexer)->ch != '|' && ft_built_in(*lexer, env) == -1)
 		ft_execve(*lexer, *env);
 	// if (gl.her_doc == 1)
 	// 	unlink("tmp");
-	dup2(out, STDOUT_FILENO);
-	dup2(in, STDIN_FILENO);
-	close(out);
-	close(in);
+	// dup2(out, STDOUT_FILENO);
+	// dup2(in, STDIN_FILENO);
+	// close(out);
+	// close(in);
 	if (gl.st != 0)
 		exit(gl.st);
 	return (0);
