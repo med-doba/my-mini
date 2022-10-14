@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:50:16 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 17:14:30 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:41:05 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,20 @@ int	ft_her_duc(char	*delimiter, t_env *env)
 
 	ptr = ft_strdup("");
 	unlink(".her_doc");
+	gl.her_doc = 1;
 	while (1)
 	{
 		tmp = readline("> ");
+		gl.sig = 1;
 		if (!tmp || !ft_strcmp(tmp, delimiter))
 		{
 			free(tmp);
 			close(gl.fd_in);
 			if ((gl.fd_in = open(".her_doc", O_WRONLY | O_CREAT, 0666)) == -1)
 				return (free(ptr), perror("open"), -1);
-			gl.her_doc = 1;
 			ft_putstr_fd(ptr, gl.fd_in);
 			close(gl.fd_in);
 			gl.fd_in = open(".her_doc", O_RDONLY);
-			gl.fd_file = -1;
 			return (free(ptr), 1);
 		}
 		envhrd = env;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 23:02:10 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 10:56:37 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:37:53 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_exit(t_lexer *lexer)
 {
 	if (!lexer->next)
-		exit(0);//khasha tkon b akhir exit status
+		exit(gl.st);
 	lexer = lexer->next;
 	if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 	{

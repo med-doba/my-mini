@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:34:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 16:30:15 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:44:22 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,9 @@ void	ft_sighandler(int sig)
 		gl.st = 1;
 	}
 	else if (sig == 2 && gl.sig == 1 && ft_strncmp(gl.rl_r, "./minishell", 11))
-	{
-		open("/Users/med-doba/.1", O_CREAT);
 		printf("\n");
-	}
 	if (sig == 3 && gl.sig == 1 && ft_strncmp(gl.rl_r, "./minishell", 11))
-	{
-		open("/Users/med-doba/.2", O_CREAT);
 		printf("Quit: 3\n");
-	}
 	else if (sig == 3 && gl.sig == 0)
 	{
 		rl_on_new_line();
@@ -133,13 +127,11 @@ int	main(int ac, char **av, char **envp)
 {
 	t_env	*env;
 
-	env = NULL;
-	ft_header();
 	(void)ac;
 	(void)av;
+	env = NULL;
 	ft_init_global();
 	signal(2, ft_sighandler);
-	signal(3, SIG_IGN);
 	signal(3, ft_sighandler);
 	env = ft_environment(envp, env);
 	ft_handle(env);

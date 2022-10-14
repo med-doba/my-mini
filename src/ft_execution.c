@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 17:16:30 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:48:22 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,12 @@ int	ft_execution_up(t_lexer **lexer, t_env **env)
 	// }
 	// dup2(gl.fd_in, 0);
 	// dup2(gl.fd_out, 1);
+
 	while (*lexer && (*lexer)->ch == 'R' && (*lexer)->ch != '|')
 		*lexer = (*lexer)->next->next;
 	if ((*lexer)->ch != '|' && ft_built_in(*lexer, env) == -1)
 		ft_execve(*lexer, *env);
+
 	// if (gl.her_doc == 1)
 	// 	unlink(".her_doc");
 	// dup2(out, STDOUT_FILENO);
@@ -135,7 +137,7 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 		arg_cmd = ft_get_full_cmd(lexer);
 	if ((gl.arg_env = convert_list(env)) == NULL)
-		return (perror("malloc"), ft_free_2d(arg_cmd), exit(127));
+		return (perror("malloc"), ft_free_2d(arg_cmd), free(path), exit(127));
 	if (execve(path, arg_cmd, gl.arg_env) == -1)
 		return (gl.st = 127, perror("execve"), free(path), ft_free_2d(arg_cmd));
 	free(path);

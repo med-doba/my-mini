@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:55:46 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/13 17:14:21 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:50:49 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void    ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
     int i;
     int in;
     int out;
-    // int status;
+    int status;
     t_lexer    *top;
     t_lexer    *top1;
 
@@ -100,21 +100,20 @@ void    ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
             return (perror("fork pipe"));
         if (gl.pid == 0)
         {
-            dup2(gl.fd_in, 0);
-            dup2(gl.fd_out, 1);
-            close_pipe(fd, n);
-            close(gl.fd_in);
-            close(gl.fd_out);
-            if (ft_execution_up(&top, env) == -1)
-                return (exit(1));
-            if (gl.her_doc == 1)
-                unlink(".her_doc");
+            // dup2(gl.fd_in, 0);
+            // dup2(gl.fd_out, 1);
+            // close_pipe(fd, n);
+            // close(gl.fd_in);
+            // close(gl.fd_out);
+            // if (ft_execution_up(&top, env) == -1)
+            //     return (exit(1));
+            // if (gl.her_doc == 1)
+            //     unlink(".her_doc");
+            // if (lexer != NULL)
             exit(0);
         }
         close(gl.fd_in);
         close(gl.fd_out);
-        // dup2(out, STDOUT_FILENO);
-        // dup2(in, STDIN_FILENO);
         while (top && (top)->ch != '|')
             top = (top)->next;
         if (top)
@@ -126,10 +125,10 @@ void    ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
     close(in);
 
 
-    // waitpid(gl.pid,&status,0);
-    // gl.st = WEXITSTATUS(status);
+    waitpid(gl.pid,&status,0);
+    gl.st = WEXITSTATUS(status);
     i = 0;
-    while (i <= n)
+    while (i < n)
     {
         wait(NULL);
         i++;
