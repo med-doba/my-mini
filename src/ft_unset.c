@@ -6,20 +6,30 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:32:13 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 13:48:46 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:35:23 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
-void	ft_unset(t_lexer *lexer, t_env **env)
+void	ft_unset_(t_env **env, t_env **tmp_prev, t_env **tmp_next, t_env **head)
+{
+	free((*env)->name);
+	free((*env)->value);
+	free(*env);
+	if (!(*tmp_prev))
+		*head = *tmp_next;
+	else if (!(*tmp_next))
+		(*tmp_prev)->next = NULL;
+	else
+		(*tmp_prev)->next = *tmp_next;
+}
+
+void	ft_unset(t_lexer *lexer, t_env **env, t_env	*tmp_prev, t_env *tmp_next)
 {
 	t_env	*head;
-	t_env	*tmp_prev;
-	t_env	*tmp_next;
 
 	head = *env;
-	lexer = lexer->next;
 	while (lexer)
 	{
 		tmp_prev = NULL;
@@ -29,15 +39,7 @@ void	ft_unset(t_lexer *lexer, t_env **env)
 			tmp_next = (*env)->next;
 			if (ft_strcmp(lexer->content, (*env)->name) == 0)
 			{
-				free((*env)->name);
-				free((*env)->value);
-				free(*env);
-				if (!tmp_prev)
-					head = tmp_next;
-				else if (!tmp_next)
-					tmp_prev->next = NULL;
-				else
-					tmp_prev->next = tmp_next;
+				ft_unset_(env, &tmp_prev, &tmp_next, &head);
 				break ;
 			}
 			tmp_prev = *env;
@@ -46,5 +48,4 @@ void	ft_unset(t_lexer *lexer, t_env **env)
 		*env = head;
 		lexer = lexer->next;
 	}
-	gl.st = 0;
 }
