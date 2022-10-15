@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:00:22 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/14 14:34:44 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:39:40 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**ft_get_full_cmd(t_lexer *lexer)
 	char	*ptr;
 	char	*join;
 	char	**two;
-	t_lexer *tmp;
+	t_lexer	*tmp;
 
 	tmp = lexer;
 	ptr = ft_strdup("");
@@ -55,15 +55,15 @@ char	*ft_find_path(char *cmd, t_env *env)
 			if (ft_strcmp(top->name, "PATH") == 0)
 			{
 				ptr = ft_split(top->value, ':');
-				if ((path = ft_collect_path(cmd, ptr)))
+				path = ft_collect_path(cmd, ptr);
+				if (path)
 					return (path);
 				return (ft_free_2d(ptr), NULL);
 			}
 			top = top->next;
 		}
 	}
-	cmd = ft_strdup(cmd);
-	return (cmd);
+	return (ft_strdup(cmd));
 }
 
 char	*ft_collect_path(char	*cmd, char **ptr)

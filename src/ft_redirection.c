@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:50:16 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/14 15:41:05 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 18:09:54 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	ft_run_redirection(t_lexer *lexer, t_env *env)
 int	ft_r_input(char *file)
 {
 	close(gl.fd_in);
-	if ((gl.fd_in = open(file, O_RDONLY, 0666)) == -1)
+	gl.fd_in = open(file, O_RDONLY, 0666);
+	if (gl.fd_in == -1)
 		return (perror("open"), -1);
 	return (0);
 }
@@ -45,7 +46,8 @@ int	ft_r_input(char *file)
 int	ft_r_output(char *file)
 {
 	close(gl.fd_out);
-	if ((gl.fd_out = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666)) == -1)
+	gl.fd_out = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666);
+	if (gl.fd_out == -1)
 		return (perror("open"), -1);
 	return (0);
 }
@@ -53,7 +55,8 @@ int	ft_r_output(char *file)
 int	ft_append(char *file)
 {
 	close(gl.fd_out);
-	if ((gl.fd_out = open(file, O_RDWR | O_CREAT | O_APPEND, 0666)) == -1)
+	gl.fd_out = open(file, O_RDWR | O_CREAT | O_APPEND, 0666);
+	if (gl.fd_out == -1)
 		return (perror("open"), -1);
 	return (0);
 }
@@ -75,7 +78,8 @@ int	ft_her_duc(char	*delimiter, t_env *env)
 		{
 			free(tmp);
 			close(gl.fd_in);
-			if ((gl.fd_in = open(".her_doc", O_WRONLY | O_CREAT, 0666)) == -1)
+			gl.fd_in = open(".her_doc", O_WRONLY | O_CREAT, 0666);
+			if (gl.fd_in == -1)
 				return (free(ptr), perror("open"), -1);
 			ft_putstr_fd(ptr, gl.fd_in);
 			close(gl.fd_in);

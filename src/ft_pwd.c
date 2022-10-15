@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:37:18 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/14 15:49:49 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 18:06:00 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ void	ft_pwd(t_env *env)
 	if (getcwd(pwd, 1024) == NULL)
 		return (gl.st = 1, perror("getcwd"));
 	printf("%s\n", pwd);
-	free(pwd);
 	gl.st = 0;
 }

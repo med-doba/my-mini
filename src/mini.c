@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:34:05 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/14 14:44:22 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 13:38:16 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_handle(t_env *env)
 		add_history(rtn);
 		ft_lexer(&lexer, rtn, &stock);
 		ft_expand(&lexer, env);
-		ft_parser(&lexer);;
+		ft_parser(&lexer);
 		if (rtn[0] != '\0')
 			ft_execution(lexer, &env);
 		if (lexer != NULL)
@@ -73,54 +73,6 @@ void	ft_init_global(void)
 	gl.sig = 0;
 	gl.her_doc = 0;
 	gl.rl_r = NULL;
-}
-
-int	ft_lstsize(t_env *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
-}
-
-char	**freeall(char **p, int i)
-{
-	while (i >= 0)
-	{
-		free(p[i]);
-		i--;
-	}
-	free(p);
-	return (NULL);
-}
-
-char	**convert_list(t_env *env)
-{
-	char	**envv;
-	int		i;
-
-	i = 0;
-	envv = (char**)malloc((ft_lstsize(env) + 1) * sizeof(char*));
-	if (envv == NULL)
-		return (NULL);
-	while(env)
-	{
-		envv[i] = ft_strjoin2(env->name, "=");
-		if (!envv[i])
-			return (freeall(&envv[i], i - 1));
-		envv[i] = ft_strjoin(envv[i], env->value);
-		if (!envv[i])
-			return (freeall(&envv[i], i - 1));
-		env = env->next;
-		i++;
-	}
-	envv[i] = NULL;
-	return (envv);
 }
 
 int	main(int ac, char **av, char **envp)

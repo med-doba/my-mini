@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 16:52:30 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:54:45 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	ft_cd(t_lexer *lexer, t_env **env);
 void	ft_cd_to_home(t_env **env, char *oldcwd);
 void	ft_change_pwd_oldpwd(t_env **env, char *cwd);
 void	ft_exit(t_lexer *lexer);
-int		ft_test_arg_exit(char	*str, char ch);
+int		ft_arg_exit(char	*str, char ch);
 void	ft_export(t_lexer *lexer, t_env **env);
 // void	ft_inject_var(char *name, char *value, t_env **env);
 void	ft_inject_var(char **ptr, t_env **env);
@@ -150,4 +150,8 @@ void	close_pipe(int fd[][2], int n);
 int		ft_execution_one_commande(t_lexer *lexer, t_env **env);
 void	ft_execve_one_commande(t_lexer *lexer, t_env *env);
 void	open_pipes(int fd[][2], int n);
+//add
+char	**convert_list(t_env *env);
+// char	*ft_char_to_str(char c);
+char	**freeall(char **p, int i);
 #endif

@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:27:32 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/10 12:33:57 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:05:37 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_echo(t_lexer *lexer)
 		lexer = lexer->next;
 		while (lexer && lexer->ch != '|')
 		{
-			while(lexer && lexer->ch != '|' && lexer->ch == 'R')
+			while (lexer && lexer->ch != '|' && lexer->ch == 'R')
 				lexer = lexer->next->next;
 			if (!lexer || lexer->ch == '|')
 				break ;

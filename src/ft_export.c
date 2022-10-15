@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:26:24 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/09 21:42:52 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 18:01:43 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,9 @@ void	ft_export(t_lexer *lexer, t_env **env)
 		ptr = ft_split_export(lexer->content);
 		if (ptr == NULL)
 			return (gl.st = 1, ft_putendl_fd("not a valid identifier", 2));
-		// ft_inject_var(ptr[0], ptr[1], env);
 		ft_inject_var(ptr, env);
 		ft_free_2d(ptr);
-		// t_lexer *op = lexer->next;
 		lexer = lexer->next;
-		// op->next = NULL;
-		// ft_free_lst(&op);
 	}
 	gl.st = 0;
 }
@@ -85,7 +81,7 @@ void	ft_inject_var(char **ptr, t_env **env)
 
 char	**ft_split_export(char *str)
 {
-	int	i;
+	int		i;
 	char	**ptr;
 
 	i = 0;
@@ -93,14 +89,14 @@ char	**ft_split_export(char *str)
 	{
 		if (str[0] >= '0' && str[0] <= '9')
 			return (NULL);
-		if(ft_if_condition(str[i]) == 1)
+		if (ft_if_condition(str[i]) == 1)
 			return (NULL);
 		i++;
 	}
 	i = 0;
-	ptr = (char**)malloc(sizeof(char *) * 3);//leaks
+	ptr = (char **)malloc(sizeof(char *) * 3);
 	ptr[2] = NULL;
-	ptr[0] = ft_strdup("");//leaks
+	ptr[0] = ft_strdup("");
 	while (str[i] && str[i] != '=')
 		ptr[0] = ft_join(ptr[0], str[i++]);
 	ptr[1] = ft_strdup("");

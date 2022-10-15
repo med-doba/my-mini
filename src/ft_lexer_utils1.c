@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer_utils1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:08:15 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 11:15:57 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/15 13:38:48 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,15 @@ int	ft_string(t_lexer **lexer, char **stock, char *str, int *i)
 			ft_add_node(lexer, stock, 0, 0);
 	}
 	return (0);
+}
+
+char	**freeall(char **p, int i)
+{
+	while (i >= 0)
+	{
+		free(p[i]);
+		i--;
+	}
+	free(p);
+	return (NULL);
 }
