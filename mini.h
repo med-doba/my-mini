@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 17:54:45 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:03:50 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,9 @@ void	ft_free_lst(t_lexer **head);
 void	ft_lstadd_back(t_lexer **lst, t_lexer *new);
 t_lexer	*ft_lstnew(char *content, int linked);
 //built-in
-void	ft_echo(t_lexer *lexer);
-int		ft_check_option_echo(char *str, int *newline);
+// void	ft_echo(t_lexer *lexer);
+void	ft_echo(t_lexer *lexer, int space, int newline, int firstone);
+int		ft_option_echo(char *str, int *newline);
 void	ft_env(t_env *env);
 void	ft_pwd(t_env *env);
 void	ft_cd(t_lexer *lexer, t_env **env);
@@ -127,7 +128,8 @@ void	ft_export(t_lexer *lexer, t_env **env);
 void	ft_inject_var(char **ptr, t_env **env);
 char	**ft_split_export(char *str);
 void	ft_sort_env(t_env **env);
-void	ft_unset(t_lexer *lexer, t_env **env);
+// void	ft_unset(t_lexer *lexer, t_env **env);
+void	ft_unset(t_lexer *lexer, t_env **env, t_env	*tmp_prev, t_env *tmp_next);
 //execution
 void	ft_collect_cmd(t_lexer **lexer, t_env **env);
 int		ft_built_in(t_lexer *lexer, t_env **env);
@@ -136,7 +138,8 @@ int		ft_execution_up(t_lexer **lexer, t_env **env);
 int		ft_run_redirection(t_lexer *lexer, t_env *env);
 void	ft_execution(t_lexer *lexer, t_env **env);
 int		ft_built_in_uppercase(t_lexer *lexer, t_env **env);
-int		ft_built_in_lowercase(t_lexer *lexer, t_env **env);
+// int		ft_built_in_lowercase(t_lexer *lexer, t_env **env);
+int		ft_built_in_lowercase(t_lexer *lexer, t_env **env, t_env *tmp_prev, t_env *tmp_next);
 char	*ft_find_path(char *cmd, t_env *env);
 char	**ft_get_full_cmd(t_lexer *lexer);
 int		ft_her_duc(char	*delimiter, t_env *env);

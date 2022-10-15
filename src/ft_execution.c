@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 17:27:56 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:27:49 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_execution(t_lexer *lexer, t_env **env)
 		{
 			if (ft_execution_one_commande(lexer, env) == -1)
 				return ;
+			if (gl.her_doc == 1)
+				unlink(".her_doc");
 		}
 	}
 	else
@@ -53,13 +55,9 @@ int	ft_execution_one_commande(t_lexer *lexer, t_env **env)
 		lexer = (lexer)->next->next;
 	if (lexer && (lexer)->ch != '|' && ft_built_in(lexer, env) == -1)
 		ft_execve_one_commande(lexer, *env);
-	if (gl.her_doc == 1)
-		unlink(".her_doc");
 	dup2(out, STDOUT_FILENO);
 	dup2(in, STDIN_FILENO);
-	close(out);
-	close(in);
-	return (0);
+	return (close(out), close(in), 0);
 }
 
 void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
@@ -74,13 +72,11 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 	if (path == NULL)
 		return (gl.st = 127, ft_putendl_fd("Error: command not found", 2));
 	gl.sig = 1;
-	pid = fork();//
+	pid = fork();
 	if (pid == -1)
 		return (perror("fork"));
-	printf("befor %d\n", gl.sig);
 	if (pid == 0)
 	{
-		printf("child %d\n", gl.sig);
 		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 			arg_cmd = ft_get_full_cmd(lexer);
 		gl.arg_env = convert_list(env);
@@ -89,10 +85,8 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
 			return (perror("execve"), ft_free_2d(arg_cmd), exit(127));
 	}
-	printf("parent %d\n", gl.sig);
-	free(path);
 	waitpid(pid, &status, 0);
-	gl.st = WEXITSTATUS(status);
+	return (gl.st = WEXITSTATUS(status), free(path));
 }
 
 int	ft_execution_up(t_lexer **lexer, t_env **env)

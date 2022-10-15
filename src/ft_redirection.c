@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:50:16 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 18:09:54 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:47:38 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,25 @@ int	ft_append(char *file)
 	return (0);
 }
 
+char	*ft_her_doc_util(char *tmp, char *ptr, t_env *env)
+{
+	t_env	*envhrd;
+
+	envhrd = env;
+	if (ft_find_char(tmp, '$') == 0)
+		tmp = ft_parse_expand(tmp, envhrd);
+	if (ft_find_staus(tmp) == 0)
+		tmp = ft_expand_status(tmp);
+	tmp = ft_strjoin(tmp, "\n");
+	ptr = ft_strjoin(ptr, tmp);
+	free(tmp);
+	return (ptr);
+}
+
 int	ft_her_duc(char	*delimiter, t_env *env)
 {
 	char	*ptr;
 	char	*tmp;
-	t_env	*envhrd;
 
 	ptr = ft_strdup("");
 	unlink(".her_doc");
@@ -73,7 +87,6 @@ int	ft_her_duc(char	*delimiter, t_env *env)
 	while (1)
 	{
 		tmp = readline("> ");
-		gl.sig = 1;
 		if (!tmp || !ft_strcmp(tmp, delimiter))
 		{
 			free(tmp);
@@ -86,14 +99,7 @@ int	ft_her_duc(char	*delimiter, t_env *env)
 			gl.fd_in = open(".her_doc", O_RDONLY);
 			return (free(ptr), 1);
 		}
-		envhrd = env;
-		if (ft_find_char(tmp, '$') == 0)
-			tmp = ft_parse_expand(tmp, envhrd);
-		if (ft_find_staus(tmp) == 0)
-			tmp = ft_expand_status(tmp);
-		tmp = ft_strjoin(tmp, "\n");
-		ptr = ft_strjoin(ptr, tmp);
-		free(tmp);
+		ptr = ft_her_doc_util(tmp, ptr, env);
 	}
 	return (0);
 }

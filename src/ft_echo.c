@@ -6,26 +6,18 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:27:32 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 17:05:37 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:16:36 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
-void	ft_echo(t_lexer *lexer)
+void	ft_echo(t_lexer *lexer, int space, int newline, int firstone)
 {
-	int	space;
-	int	newline;
-	int	firstone;
-
-	firstone = 0;
-	space = 0;
-	newline = 0;
-	if (!lexer->next || lexer->next->ch == 'R')
+	if (!lexer || lexer->ch == 'R')
 		printf("\n");
 	else
 	{
-		lexer = lexer->next;
 		while (lexer && lexer->ch != '|')
 		{
 			while (lexer && lexer->ch != '|' && lexer->ch == 'R')
@@ -33,7 +25,7 @@ void	ft_echo(t_lexer *lexer)
 			if (!lexer || lexer->ch == '|')
 				break ;
 			if (firstone == 0)
-				while (lexer && ft_check_option_echo(lexer->content, &newline) == 2)
+				while (lexer && ft_option_echo(lexer->content, &newline) == 2)
 					lexer = lexer->next;
 			firstone = 1;
 			if (space == 1)
@@ -47,10 +39,9 @@ void	ft_echo(t_lexer *lexer)
 	}
 	if (space == 1 && newline == 0)
 		printf("\n");
-	gl.st = 0;
 }
 
-int	ft_check_option_echo(char *str, int *newline)
+int	ft_option_echo(char *str, int *newline)
 {
 	char	**ptr;
 	int		i;

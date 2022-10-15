@@ -6,39 +6,43 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:26:24 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 18:01:43 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:36:59 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
-void	ft_export(t_lexer *lexer, t_env **env)
+void	ft_export_cmd(t_env *env)
 {
 	t_env	*head0;
 	t_env	*head1;
 	int		index;
+
+	head0 = env;
+	head1 = env;
+	index = 0;
+	while (head1)
+	{
+		while (head0->index != index)
+			head0 = head0->next;
+		if (head0->value)
+			printf("declare -x %s=\"%s\"\n", head0->name, head0->value);
+		else
+			printf("declare -x %s\n", head0->name);
+		head1 = head1->next;
+		head0 = env;
+		index++;
+	}
+}
+
+void	ft_export(t_lexer *lexer, t_env **env)
+{
 	char	**ptr;
 
-	index = 0;
 	ptr = NULL;
-	head0 = *env;
-	head1 = *env;
 	ft_sort_env(env);
 	if (!lexer->next)
-	{
-		while (head1)
-		{
-			while (head0->index != index)
-				head0 = head0->next;
-			if (head0->value)
-				printf("declare -x %s=\"%s\"\n", head0->name, head0->value);
-			else
-				printf("declare -x %s\n", head0->name);
-			head1 = head1->next;
-			head0 = *env;
-			index++;
-		}
-	}
+		ft_export_cmd(*env);
 	lexer = lexer->next;
 	while (lexer && lexer->ch != '|' && lexer->ch != 'R')
 	{
