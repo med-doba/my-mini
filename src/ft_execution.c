@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 17:27:56 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:10:11 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_execution(t_lexer *lexer, t_env **env)
 {
 	int	pipe;
-
+	
 	pipe = ft_nbr_of_pipes(lexer);
 	if (pipe == 0)
 	{
@@ -77,10 +77,8 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 	pid = fork();//
 	if (pid == -1)
 		return (perror("fork"));
-	printf("befor %d\n", gl.sig);
 	if (pid == 0)
 	{
-		printf("child %d\n", gl.sig);
 		if (lexer && lexer->ch != '|' && lexer->ch != 'R')
 			arg_cmd = ft_get_full_cmd(lexer);
 		gl.arg_env = convert_list(env);
@@ -89,7 +87,6 @@ void	ft_execve_one_commande(t_lexer *lexer, t_env *env)
 		if (execve(path, arg_cmd, gl.arg_env) == -1)
 			return (perror("execve"), ft_free_2d(arg_cmd), exit(127));
 	}
-	printf("parent %d\n", gl.sig);
 	free(path);
 	waitpid(pid, &status, 0);
 	gl.st = WEXITSTATUS(status);

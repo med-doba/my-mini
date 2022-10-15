@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 17:54:45 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/15 23:08:35 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,15 @@ int		ft_r_input(char *file);
 char	*ft_collect_path(char	*cmd, char **ptr);
 int		ft_nbr_of_pipes(t_lexer *lexer);
 void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n);
-void	close_pipe(int fd[][2], int n);
+void	close_pipe(int **fd, int n);
 int		ft_execution_one_commande(t_lexer *lexer, t_env **env);
 void	ft_execve_one_commande(t_lexer *lexer, t_env *env);
-void	open_pipes(int fd[][2], int n);
+int		**open_pipes(int **fd, int n);
+void	ft_run_redirection_in_pipe(t_lexer *lexer, t_env **env);
+void	wait_childs(int len);
+void	command_fork(t_lexer *top, t_env **env, int **fd, int n);
+void	dup_for_pipe(int **fd, int *i, int n);
+
 //add
 char	**convert_list(t_env *env);
 // char	*ft_char_to_str(char c);
