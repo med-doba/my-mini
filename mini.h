@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 23:43:17 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:05:52 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	ft_free_lst(t_lexer **head);
 void	ft_lstadd_back(t_lexer **lst, t_lexer *new);
 t_lexer	*ft_lstnew(char *content, int linked);
 //built-in
-// void	ft_echo(t_lexer *lexer);
 void	ft_echo(t_lexer *lexer, int space, int newline, int firstone);
 int		ft_option_echo(char *str, int *newline);
 void	ft_env(t_env *env);
@@ -124,11 +123,9 @@ void	ft_change_pwd_oldpwd(t_env **env, char *cwd);
 void	ft_exit(t_lexer *lexer);
 int		ft_arg_exit(char	*str, char ch);
 void	ft_export(t_lexer *lexer, t_env **env);
-// void	ft_inject_var(char *name, char *value, t_env **env);
 void	ft_inject_var(char **ptr, t_env **env);
 char	**ft_split_export(char *str);
 void	ft_sort_env(t_env **env);
-// void	ft_unset(t_lexer *lexer, t_env **env);
 void	ft_unset(t_lexer *lexer, t_env **env, t_env	*tmp_prev, t_env *tmp_next);
 //execution
 void	ft_collect_cmd(t_lexer **lexer, t_env **env);
@@ -138,8 +135,7 @@ int		ft_execution_up(t_lexer **lexer, t_env **env);
 int		ft_run_redirection(t_lexer *lexer, t_env *env);
 void	ft_execution(t_lexer *lexer, t_env **env);
 int		ft_built_in_uppercase(t_lexer *lexer, t_env **env);
-// int		ft_built_in_lowercase(t_lexer *lexer, t_env **env);
-int		ft_built_in_lowercase(t_lexer *lexer, t_env **env, t_env *tmp_prev, t_env *tmp_next);
+int		ft_built_in_lowercase(t_lexer *lexe, t_env **env, t_env *pr, t_env *ne);
 char	*ft_find_path(char *cmd, t_env *env);
 char	**ft_get_full_cmd(t_lexer *lexer);
 int		ft_her_duc(char	*delimiter, t_env *env);
@@ -157,7 +153,6 @@ void	ft_run_redirection_in_pipe(t_lexer *lexer, t_env **env);
 void	wait_childs(int len);
 void	command_fork(t_lexer *top, t_env **env, int **fd, int n);
 void	dup_for_pipe(int **fd, int *i, int n);
-
 //add
 char	**convert_list(t_env *env);
 // char	*ft_char_to_str(char c);

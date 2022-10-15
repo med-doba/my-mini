@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 23:42:30 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:00:05 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,20 +119,4 @@ void	ft_execve(t_lexer *lexer, t_env *env)
 	if (execve(path, arg_cmd, gl.arg_env) == -1)
 		return (gl.st = 127, perror("execve"), free(path), ft_free_2d(arg_cmd));
 	free(path);
-}
-
-int	ft_nbr_of_pipes(t_lexer *lexer)
-{
-	int		pipe;
-	t_lexer	*top;
-
-	pipe = 0;
-	top = lexer;
-	while (top)
-	{
-		if (top->ch == '|')
-			pipe++;
-		top = top->next;
-	}
-	return (pipe);
 }
