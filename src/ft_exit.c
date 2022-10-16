@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 23:02:10 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 17:55:31 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/16 18:46:48 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	ft_arg_exit(char	*str, char ch)
 	long long	nbr;
 
 	i = 0;
+	printf("nbr = %s\n", str);
 	nbr = ft_atoi(str);
+	printf("nbr = %lld\n", nbr);
 	if ((str[i] == '|' || str[i] == '<' || str[i] == '>')
 		&& ch != '"' && ch != '\'')
 		return (2);

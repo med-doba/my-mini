@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:00:39 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/16 12:07:13 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/16 18:08:11 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,6 @@ int	**open_pipes(int n)
 
 void	ft_run_redirection_in_pipe(t_lexer *lexer, t_env **env)
 {
-	t_lexer	*top;
-
-	top = lexer;
 	while (lexer && lexer->ch != '|')
 	{
 		if (lexer->ch == 'R')
