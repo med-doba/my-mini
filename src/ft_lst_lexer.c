@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_lexer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:40:11 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 13:42:25 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:21:17 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ char	**convert_list(t_env *env)
 	{
 		envv[i] = ft_strjoin2(env->name, "=");
 		if (!envv[i])
-			return (freeall(&envv[i], i - 1));
+			return (freeall(&envv[i], i - 1), NULL);
 		envv[i] = ft_strjoin(envv[i], env->value);
 		if (!envv[i])
-			return (freeall(&envv[i], i - 1));
+			return (freeall(&envv[i], i - 1), NULL);
 		env = env->next;
 		i++;
 	}

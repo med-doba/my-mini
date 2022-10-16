@@ -6,15 +6,39 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:55:46 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/15 23:10:08 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:05:37 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
+void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
+{
+	int			**fd;
+	int			i;
+
+	i = 0;
+	fd = open_pipes(n);
+	if (fd == NULL)
+		return ;
+	while (lexer)
+	{
+		dup_for_pipe(fd, &i, n);
+		ft_run_redirection_in_pipe(lexer, env);
+		command_fork(lexer, env, fd, n);
+		while (lexer && (lexer)->ch != '|')
+			lexer = (lexer)->next;
+		if (lexer)
+			lexer = (lexer)->next;
+		i++;
+	}
+	close_pipe(fd, n);
+	wait_childs(n);
+	ft_free_2d_fd(fd);
+}
+
 void	command_fork(t_lexer *top, t_env **env, int **fd, int n)
 {
-	ft_run_redirection_in_pipe(top, env);
 	gl.sig = 1;
 	gl.pid = fork();
 	if (gl.pid == -1)
@@ -28,8 +52,6 @@ void	command_fork(t_lexer *top, t_env **env, int **fd, int n)
 		close(gl.fd_out);
 		if (ft_execution_up(&top, env) == -1)
 			return (exit(1));
-		if (gl.her_doc == 1)
-			unlink(".her_doc");
 		exit(0);
 	}
 	close(gl.fd_in);
@@ -52,28 +74,4 @@ void	dup_for_pipe(int **fd, int *i, int n)
 		gl.fd_in = dup(fd[*i - 1][0]);
 		close(fd[*i - 1][0]);
 	}
-}
-
-void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n)
-{
-	int			**fd;
-	int			i;
-
-	i = 0;
-	fd = NULL;
-	fd = open_pipes(fd, n);
-	if (fd == NULL)
-		return ;
-	while (lexer)
-	{
-		dup_for_pipe(fd, &i, n);
-		command_fork(lexer, env, fd, n);
-		while (lexer && (lexer)->ch != '|')
-			lexer = (lexer)->next;
-		if (lexer)
-			lexer = (lexer)->next;
-		i++;
-	}
-	close_pipe(fd, n);
-	wait_childs(n);
 }

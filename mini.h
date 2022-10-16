@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/16 00:05:52 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:04:05 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,13 +148,15 @@ void	ft_execute_pipe(t_lexer *lexer, t_env **env, int n);
 void	close_pipe(int **fd, int n);
 int		ft_execution_one_commande(t_lexer *lexer, t_env **env);
 void	ft_execve_one_commande(t_lexer *lexer, t_env *env);
-int		**open_pipes(int **fd, int n);
+int		**open_pipes(int n);
 void	ft_run_redirection_in_pipe(t_lexer *lexer, t_env **env);
 void	wait_childs(int len);
 void	command_fork(t_lexer *top, t_env **env, int **fd, int n);
 void	dup_for_pipe(int **fd, int *i, int n);
+void	ft_free_2d_fd(int **ptr);
 //add
 char	**convert_list(t_env *env);
 // char	*ft_char_to_str(char c);
-char	**freeall(char **p, int i);
+void	freeall(char **p, int i);
+void	freeall_fd(int **p, int i);
 #endif

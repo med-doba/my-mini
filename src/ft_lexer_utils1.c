@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer_utils1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:08:15 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/15 13:38:48 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:21:58 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_string(t_lexer **lexer, char **stock, char *str, int *i)
 	return (0);
 }
 
-char	**freeall(char **p, int i)
+void	freeall(char **p, int i)
 {
 	while (i >= 0)
 	{
@@ -69,5 +69,14 @@ char	**freeall(char **p, int i)
 		i--;
 	}
 	free(p);
-	return (NULL);
+}
+
+void	freeall_fd(int **p, int i)
+{
+	while (i >= 0)
+	{
+		free(p[i]);
+		i--;
+	}
+	free(p);
 }

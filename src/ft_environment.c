@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_environment.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 10:57:18 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/13 16:51:33 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:18:16 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
 void	ft_free_2d(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	while (ptr[i])
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
+}
+
+void	ft_free_2d_fd(int **ptr)
 {
 	int	i;
 

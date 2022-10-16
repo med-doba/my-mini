@@ -6,7 +6,7 @@
 /*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 23:00:39 by amasnaou          #+#    #+#             */
-/*   Updated: 2022/10/15 23:01:05 by amasnaou         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:07:13 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,25 @@ void	close_pipe(int **fd, int n)
 	}
 }
 
-int	**open_pipes(int **fd, int n)
+int	**open_pipes(int n)
 {
 	int	i;
+	int	**fd;
 
 	i = 0;
-	fd = (int **)malloc(n * sizeof(int *));
+	fd = (int **)malloc((n + 1) * sizeof(int *));
 	if (!fd)
 		return (NULL);
 	while (i < n)
 	{
 		fd[i] = (int *)malloc(2 * sizeof(int));
 		if (!fd)
-			return (NULL);
+			return (freeall_fd(fd, (i - 1)), NULL);
 		if (pipe(fd[i]) == -1)
 			return (NULL);
 		i++;
 	}
+	fd[i] = NULL;
 	return (fd);
 }
 

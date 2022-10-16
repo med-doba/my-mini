@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amasnaou <amasnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 17:00:17 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/16 00:00:05 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/16 09:45:26 by amasnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ void	ft_execution(t_lexer *lexer, t_env **env)
 		}
 	}
 	else
+	{
 		ft_execute_pipe(lexer, env, pipe);
+		if (gl.her_doc == 1)
+			unlink(".her_doc");
+	}
 }
 
 int	ft_execution_one_commande(t_lexer *lexer, t_env **env)
