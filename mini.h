@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:50 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/16 19:17:10 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:21:54 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	ft_change_pwd_oldpwd(t_env **env, char *cwd);
 void	ft_exit(t_lexer *lexer);
 int		ft_arg_exit(char	*str, char ch);
 void	ft_export(t_lexer *lexer, t_env **env);
-void	ft_inject_var(char **ptr, t_env **env, char *str);
+void	ft_inject_var(char **ptr, t_env **env, char *str, int exist);
 char	**ft_split_export(char *str);
 void	ft_sort_env(t_env **env);
 void	ft_unset(t_lexer *lexer, t_env **env, t_env	*tmp_prev, t_env *tmp_next);

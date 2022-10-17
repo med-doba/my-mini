@@ -6,7 +6,7 @@
 /*   By: med-doba <med-doba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:26:24 by med-doba          #+#    #+#             */
-/*   Updated: 2022/10/16 19:18:36 by med-doba         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:39:35 by med-doba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	ft_export_cmd(t_env *env)
 void	ft_export(t_lexer *lexer, t_env **env)
 {
 	char	**ptr;
+	int		already_exists;
 
+	already_exists = 0;
 	ptr = NULL;
 	ft_sort_env(env);
 	if (!lexer->next || lexer->next->ch == '|')
@@ -49,21 +51,22 @@ void	ft_export(t_lexer *lexer, t_env **env)
 		ptr = ft_split_export(lexer->content);
 		if (ptr == NULL)
 			return (gl.st = 1, ft_putendl_fd("not a valid identifier", 2));
-		ft_inject_var(ptr, env, lexer->content);
+		if (ptr[0][0] == '\0')
+			return (gl.st = 1, ft_putendl_fd("not a valid identifier", 2),
+				ft_free_2d(ptr));
+		ft_inject_var(ptr, env, lexer->content, already_exists);
 		ft_free_2d(ptr);
 		lexer = lexer->next;
 	}
 	gl.st = 0;
 }
 
-void	ft_inject_var(char **ptr, t_env **env, char *str)
+void	ft_inject_var(char **ptr, t_env **env, char *str, int already_exists)
 {
 	t_env	*head;
-	int		already_exists;
 	t_env	*node;
 
 	head = *env;
-	already_exists = 0;
 	while (*env)
 	{
 		if (ft_strcmp((*env)->name, ptr[0]) == 0)
